@@ -1,0 +1,11 @@
+#resources-list dt {
+	cursor: pointer;
+}
+
+#resources-list dt i {
+	margin-right: 3px;
+}
+
+.add-on {
+	margin-bottom: 9px;
+}
