@@ -6,18 +6,21 @@
 
 #include <string>
 
-class info
+class Info
 {
 	protected:
-		string type;
+		std::string _type;
 
 	public:
-		info():type("non"){}
-		info(string a):type(a){}
+		Info();
+		Info(std::string type);
 
-		virtual ~info();
+		virtual ~Info();
+
+		std::string getType();
+		void        setType(std::string type);
 };
 
 #endif
 
-#endif // header guard 
+#endif // header guard

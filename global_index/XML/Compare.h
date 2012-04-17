@@ -3,29 +3,29 @@
 
 #include <string>
 #include <vector>
-class Compare: public info{
 
-	private:
-	//string type;
-	vector <info> Info;
-	
-	
-	public:
+#include "info.h"
+
+class Compare: public Info
+{
+public:
 	Compare();
-	Compare(string);
-	Compare(string, vector <info>);
+	Compare(std::string type);
+	Compare(std::string type, std::vector<Info*> data);
 	virtual ~Compare();
-	string getType();
-	vector <info>& getInfo();
-	
-	virtual void setType(string );
-	
-	void AddAtrib(Atribute);
-	void setAtrib(vector <Atribute>);
-	void setComp(vector <Compare>);
-	
-	string toString();
-	
+
+	void addInfo(Info* data);
+    std::vector <Info*>& getInfo();
+
+	std::string toString();
+
+
+
+private:
+	std::vector<Info*> _data;
+
+
+
 };
 
 #endif
