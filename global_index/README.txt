@@ -1,6 +1,11 @@
 
 ----------[ Global Cache ]----------
 
+Wymagania:
+
+     * Baza danych PostgreSQL (PostgreSQL 9.1)
+     * Biblioteka do obslugi PostgreSQL w C++ (pqxx)
+
 Opis Dzialania:
 
      * Bufor globalny (global_cache) przyjmuje zapytania w formie "drzewa zapytania".
@@ -8,5 +13,4 @@ Opis Dzialania:
        (query_dispatcher) z ktorego zwracane jest zapytanie w formie SQL dla bazy danych.
      * (global_cache) odpytuje poprzez modul zarzadzania baza danych (database_storage) o
        wartosci statyczne po czym zwraca otrzymane wyniki przez interfejs zewnetrzny
-
 
