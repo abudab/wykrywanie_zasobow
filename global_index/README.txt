@@ -14,3 +14,36 @@ Opis Dzialania:
      * (global_cache) odpytuje poprzez modul zarzadzania baza danych (database_storage) o
        wartosci statyczne po czym zwraca otrzymane wyniki przez interfejs zewnetrzny
 
+Architektura:
+
+
+		+----------------+	      +-----------------+	  
+		|                |	      |                 +<----------------+
+		|  Querry        |	      |   Database      |	          |
+		|  Dispatcher    |	      |   Storage       |	          V
+		|                +--\         |                 |	        -------
+		+----------------+   \        +----+--------+---+	     --/       \--
+		        ^ 	      \		   ^	    |		    /             \
+			 \ 	  [const char*]	   |	    |		    |             |
+			  | 	       \	 getData()  |		    \             /
+			  \  	        \	   |	    |		    |--\       /--|
+			   \  	         \	   |   	  [???]		    |   -------   |
+			dispatch()       |	   |   	    |		    |  DATABASE   |
+			     | 		  V	   |   	    /		    \    PG 9.1   /
+			     \ 	    +--------------+-+ 	  -/		     --\       /--
+			      \     |                |   /		        -------
+			       \----+   Global       |  /
+				    |   Cache        |<			    [postgres.dump]
+				    |                +----------------+
+				    +----+------+----+		      |
+					 |	^		*implements*
+					 |	|		      |
+		                	 |	|		     \-/
+	          <-------- [response] --+	|		      V
+	       					|		+-----+-----------+
+	       					|		|                 |
+	          --------- getData() ----------+		|      Global     |
+	       	            [search]				|      Cache      |
+								|    Interface    |
+								|                 |
+								+-----------------+
