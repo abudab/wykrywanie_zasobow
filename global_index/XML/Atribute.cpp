@@ -1,29 +1,32 @@
 #include "Atribute.h"
 #include <sstream>
 using namespace std;
-
-Atribute::Atribute():_name("atrib"),  _value("0")
+/// Konstruktor domyślny. Nadaje domyślnie _type="non", _name="atrib", value="0"
+Atribute::Atribute():Info(),_name("atrib"),  _value("0")
 {
 }
-
+/// Konstruktor zalezny od 3 parametrów typu string
+/// \param name - nazwa atrybutu
+/// \param type - typ atrybutu
+/// \param value - wartość typu
 Atribute::Atribute(string name, string type,string value): Info(type),_name(name), _value(value)
 {
 }
-
+/// Destruktor
 Atribute::~Atribute()
 {
 }
-
+/// Funkcja zwracająca string zawierający nazwę atrybutu
 string Atribute::getName()
 {
 	return _name;
 }
-
+/// Funkcja zwracająca string zawierający wartość atrybutu
 string Atribute::getValue()
 {
 	return _value;
 }
-
+/// Funcja zwracająca int zawierający wartość atrybutu
 int Atribute::getValueI()
 {
     istringstream buffer(_value);
@@ -31,20 +34,23 @@ int Atribute::getValueI()
     buffer >>id;
 	return id;
 }
-
-void Atribute::setName(string n)
+/// Funkcja nadająca nazwę atrybutu
+/// \param nazwa nazwa atrybutu, która zostanie przypisana atrybutowi
+void Atribute::setName(string nazwa)
 {
-	_name=n;
+	_name=nazwa;
 }
-
+/// Funkcja zmieniająca wartość atrybutu
+/// \param val wartość int przypisywana atrybutowi
 void Atribute::setValue(int val)
 {
 	stringstream ss;
     ss << val;
     _value=ss.str();
 }
-
-void Atribute::setValue(string v)
+/// Funkcja zmieniająca wartość atrybutu
+/// \param value wartość strin przypisywana atrybutowi
+void Atribute::setValue(string value)
 {
-	_value=v;
+	_value=value;
 }
