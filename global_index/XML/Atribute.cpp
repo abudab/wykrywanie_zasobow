@@ -48,6 +48,7 @@ void Atribute::setValue(int val)
     ss << val;
     _value=ss.str();
 }
+
 /// Funkcja zmieniająca wartość atrybutu
 /// \param value wartość strin przypisywana atrybutowi
 void Atribute::setValue(string value)
