@@ -1,13 +1,14 @@
 #ifndef INFO
 #define INFO
-
+/////////////////////////////////////////////////////////
+/// \file Info
+/// \author Monika Godzwon
+/// \brief  klasa Info, klasa podstawowa po której dziedzicy Atribute i Compare
+////////////////////////////////////////////////////////
 #include <string>
-
+/// \class Info Prosta klasa pomocnicza
 class Info
 {
-	public:
-		std::string _type;
-
 	public:
 		Info();
 		Info(std::string type);
@@ -16,6 +17,9 @@ class Info
 
 		std::string getType();
 		void        setType(std::string type);
+
+    public:
+		std::string _type;
 };
 
 #endif
