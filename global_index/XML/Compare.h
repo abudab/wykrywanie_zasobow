@@ -15,6 +15,7 @@ public:
 	virtual ~Compare();
 
 	void addInfo(Info* data);
+	void setInfo(std::vector<Info*> data);
     std::vector <Info*>& getInfo();
 
 	std::string toString();
