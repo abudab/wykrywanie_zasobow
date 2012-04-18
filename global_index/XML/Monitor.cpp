@@ -1,38 +1,53 @@
-
 #include "Monitor.h"
+
 using namespace std;
-
-Monitor::Monitor()
-{
-	_name="new_M";
-
-}
-Monitor::Monitor(string name, vector<Atribute*> atrib)
+/// Konstruktor domyślny nadający monitorowi nazwę "new_M"
+Monitor::Monitor():_name("new_M")
 {
 }
+/// Konstruktor zależny od dwóch parametrów name i atrib
+/// \param name string przypisywany jako nazwa atrybutu
+/// \param atrib wektor atrybutów, które zawiera podany zasób
+Monitor::Monitor(string name, vector<Atribute> atrib):_name(name), _atrib(atrib)
+{
+}
+/// Destruktor
 Monitor::~Monitor()
 {
-    _atrib.clear();
+    /*
+    int siz=_atrib.size();
+    for(int i=0; i<siz; ++i)
+    {
+        delete &_atrib[i];
+
+    }*/
+        _atrib.clear();
 }
-/*
+/// Funkcja zwracająca nazwę monitora/zasobu
 string Monitor::getName()
 {
     return _name;
 }
-vector<Atribute*>& Monitor::getAtrib()
+/// Funkcja zwracająca wskaźnik do wektora z Atrybutami monitora/zasobu
+vector<Atribute>& Monitor::getAtrib()
 {
     return _atrib;
 }
-void Monitor::setName(string n)
+/// Funkcja ustawiająca nazwę monitora
+/// \param name string reprezentujący przypisywaną nazwę monitora
+void Monitor::setName(string name)
 {
-    _name=n;
+    _name=name;
 }
-void Monitor::addAtrib(Atribute* atrib)
+/// Funkcja pozwalająca dodać jeden atrybut do zbioru juz istniejącego
+/// \param atrib dodawany atrybut
+void Monitor::addAtrib(Atribute atrib)
 {
     _atrib.push_back(atrib);
 }
-void Monitor::setAtribs(vector<Atribute*> new_a)
+/// Funkcja zamieniająca vektor atrybutów na nowy
+/// \param new_a wektor nowych atrybutów
+void Monitor::setAtribs(vector<Atribute> new_a)
 {
     _atrib=new_a;
 }
-*/
