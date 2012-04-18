@@ -2,22 +2,27 @@
 #define _Response_H_
 
 #include <string>
+#include <vector>
+
 #include "Atribute.h"
+
 class Monitor{
-	private:
-		string name;
-		vector <Atribute> atrib;
+
 	public:
 		Monitor();
-		Monitor(string , vector <Atribute>);
+		Monitor(std::string name , std::vector<Atribute*> atrib);
 		~Monitor();
-		
-		string getName();
-		vector <Atribute>& getAtrib();
-		
-		void setName(string);
-		void addAtrib(Atribute);
-		void setAtribs(vector <Atribute>);
+
+	/*	std::string getName();
+		std::vector <Atribute*>& getAtrib();
+
+		void setName(std::string name);
+		void addAtrib(Atribute* atrib);
+		void setAtribs(std::vector <Atribute*> new_atrib);*/
+
+    private:
+		std::string _name;
+		std::vector <Atribute*> _atrib;
 };
 
 #endif

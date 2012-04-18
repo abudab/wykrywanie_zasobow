@@ -3,13 +3,13 @@
 #else
 #define PUGIXML_API __declspec(dllimport)
 #endif
-#include "pugixml.hpp"
+//#include "pugixml.hpp"
 #include "Compare.h"
-#include "Filter.h"
+
 /////////////////////////////////////////////////////////
 /// \file Search
 /// \author Monika Godzwon
-/// \brief  klasa search reprezentujaca zapytanie XML w postaci drzewa 
+/// \brief  klasa search reprezentujaca zapytanie XML w postaci drzewa
 ////////////////////////////////////////////////////////
 
 #ifndef _SEARCH_H_
@@ -17,33 +17,35 @@
 
 #include <string>
 #include <vector>
-#define Filter string
+#define Filter std::string
 class Search{
-	private:
-		string name;
-		int id;
-		vector <Filter> filters;
-		vector <Compare> comp;
-		
+
+
+
 	public:
 		Search();
-		Search(String );//pobiera XML
+		Search(std::string xml);//pobiera XML
 		~Search();
-		string getName();
-		string getId();
+		std::string getName();
+		std::string getId();
 		int getIdI();
-		vector <Filter>& getFilters(); 
-		vector<Compare>& getComp(); 
-		
-		void setName(string );
-		void setId(int);
-		void setId(string);
-		void addFilter(Filter);
-		void addCompare(Compare );
-		void setCompare(vector<Compare>);
-		void setFilters(vector<Filter>);
-		void loadS(string );// pobiera XML
-	
+		std::vector<Filter*>& getFilters();
+		std::vector<Compare*>& getComp();
+
+		void setName(std::string name);
+		void setId(int id);
+		void setId(std::string id);
+		void addFilter(Filter filt);
+		void addCompare(Compare com);
+		void setCompare(std::vector<Compare*> comp);
+		void setFilters(std::vector<Filter*> filter);
+		void loadS(std::string xml);// pobiera XML
+
+private:
+		std::string _name;
+		int _id;
+		std::vector<Filter*> _filters;
+		std::vector<Compare*> _comp;
 };
 
 #endif

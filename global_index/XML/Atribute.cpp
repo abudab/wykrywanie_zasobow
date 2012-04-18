@@ -1,12 +1,12 @@
-#include <Atribute.h>
-
+#include "Atribute.h"
+#include <sstream>
 using namespace std;
 
-Atribute::Atribute():name("atrib"), type("non"), value("0")
+Atribute::Atribute():_name("atrib"),  _value("0")
 {
 }
 
-Atribute::Atribute(string n, string t,string v):name(n), type(t), value(v)
+Atribute::Atribute(string name, string type,string value): Info(type),_name(name), _value(value)
 {
 }
 
@@ -16,32 +16,35 @@ Atribute::~Atribute()
 
 string Atribute::getName()
 {
-	return name;
+	return _name;
 }
 
 string Atribute::getValue()
 {
-	return value;
+	return _value;
 }
 
 int Atribute::getValueI()
 {
-	return value;
+    istringstream buffer(_value);
+    int id;
+    buffer >>id;
+	return id;
 }
 
 void Atribute::setName(string n)
 {
-	name=n;
+	_name=n;
 }
 
 void Atribute::setValue(int val)
 {
 	stringstream ss;
     ss << val;
-    value=ss.str();
+    _value=ss.str();
 }
 
 void Atribute::setValue(string v)
 {
-	value=v;
+	_value=v;
 }

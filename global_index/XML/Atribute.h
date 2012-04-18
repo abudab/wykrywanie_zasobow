@@ -2,26 +2,27 @@
 #define _ATR_H
 
 #include <string>
+#include "info.h"
 
-class Atribute: public info{
+class Atribute: public Info{
 
 	private:
-		string name;
+		std::string _name;
 		//string type;
-		string value;//aby moznabylo obsluzyc:  <Atrybute type="Static" name="OS-Name" value="Debian 6 (Squeeze)" />
+		std::string _value;//aby moznabylo obsluzyc:  <Atrybute type="Static" name="OS-Name" value="Debian 6 (Squeeze)" />
 
 	public:
 		Atribute();
-		Atribute(string , string ,string);
+		Atribute(std::string , std::string ,std::string);
 		virtual ~Atribute();
 
-		string  getName();
-		string  getValue();
+		std::string  getName();
+		std::string  getValue();
 		int     getValueI();
 
-		void setName(string);
+		void setName(std::string);
 		void setValue(int);
-		void setValue(string);
+		void setValue(std::string);
 
 };
 

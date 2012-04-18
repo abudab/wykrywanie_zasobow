@@ -1,6 +1,3 @@
-#ifndef HEADER_46EFCDD057C01C40
-#define HEADER_46EFCDD057C01C40
-
 #ifndef INFO
 #define INFO
 
@@ -8,7 +5,7 @@
 
 class Info
 {
-	protected:
+	public:
 		std::string _type;
 
 	public:
@@ -23,4 +20,3 @@ class Info
 
 #endif
 
-#endif // header guard

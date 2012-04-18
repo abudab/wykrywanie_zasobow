@@ -1,9 +1,11 @@
 #include "Compare.h"
+#include "info.h"
 
 using namespace std;
 
 Compare::Compare(string type):Info(type)
 {
+    vector<Info*> p;
 }
 
 Compare::Compare(string type, vector<Info*> data):Info(type), _data(data)
@@ -31,5 +33,9 @@ vector<Info*>& Compare::getInfo()
 }
 string Compare::toString()
 {
-    return " ";
+    return " ";//TO DO in future
+}
+void Compare::setInfo(vector<Info*> data)
+{
+
 }

@@ -1,7 +1,9 @@
-Poprawic metody
+
 
 #include "Search.h"
 #include <sstream>
+using namespace std;
+
 ///Konstruktor domyslny klasy Search
 Search::Search()
 {
@@ -18,29 +20,31 @@ Search::~Search()
 }
 string Search::getName()
 {
-	return name;
+	return _name;
 }
-string Search::getIdI()
+string Search::getId()
 {
 	stringstream ss;//create a stringstream
-    ss << id;
+    ss << _id;
     return ss.str();//return a string
 }
-int Search::getId()
+int Search::getIdI()
 {
-	return id;
+	return _id;
 }
 void Search::setName(string n)
 {
-	name=n;
+	_name=n;
 }
-void Search::setId(int value){
-	id=value;
+void Search::setId(int value)
+{
+	_id=value;
 }
-void Search::setId(string n){
+void Search::setId(string n)
+{
 
  istringstream buffer(n);
- buffer >>id;
+ buffer >>_id;
 
 }
 void Search::addFilter(Filter){
@@ -51,12 +55,12 @@ void Search::addCompare(Compare ){
 //zarezerwowanie pamieci o 1 element wiecej , przepisanei tablicy i ewntualna inkrementacja licznika elementów
 //zwolnienie pamiêci
 }
-vector <Filter>& Search::getFilter(){
-
-	return filters
- 
+vector <Filter*>& Search::getFilters()
+{
+	return _filters;
  }
-vector<Compare>& Search::getComp(){
-
-} 
+vector<Compare*>& Search::getComp()
+{
+    return _comp;
+}
 
