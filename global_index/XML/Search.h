@@ -3,6 +3,7 @@
 #else
 #define PUGIXML_API __declspec(dllimport)
 #endif
+#include "pugiconfig.hpp"
 //#include "pugixml.hpp"
 #include "Compare.h"
 
@@ -19,7 +20,7 @@
 #include <vector>
 #define Filter std::string
 class Search{
-
+//pugi::xml_document a;
 
 
 	public:

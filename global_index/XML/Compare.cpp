@@ -1,6 +1,6 @@
 #include "Compare.h"
 #include "info.h"
-
+#include <sstream>
 using namespace std;
 
 Compare::Compare(string type):Info(type)

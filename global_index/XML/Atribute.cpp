@@ -17,12 +17,12 @@ Atribute::~Atribute()
 {
 }
 /// Funkcja zwracająca string zawierający nazwę atrybutu
-string Atribute::getName()
+string Atribute::getName() const
 {
 	return _name;
 }
 /// Funkcja zwracająca string zawierający wartość atrybutu
-string Atribute::getValue()
+string Atribute::getValue() const
 {
 	return _value;
 }
@@ -54,4 +54,19 @@ void Atribute::setValue(int val)
 void Atribute::setValue(string value)
 {
 	_value=value;
+}
+/// Konstruktor kopiujący
+Atribute::Atribute(const Atribute& atrib)
+{
+        _name=atrib.getName();
+        _type=atrib.getType();
+        _value=atrib.getValue();
+
+}
+Atribute::Atribute(const Atribute* atrib)
+{
+        _name=atrib->getName();
+        _type=atrib->getType();
+        _value=atrib->getValue();
+
 }

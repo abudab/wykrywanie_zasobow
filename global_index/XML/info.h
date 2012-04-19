@@ -15,7 +15,7 @@ class Info
 
 		virtual ~Info();
 
-		std::string getType();
+		std::string getType()const;
 		void        setType(std::string type);
 
     public:

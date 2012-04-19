@@ -15,7 +15,7 @@ Info::~Info()
 {
 }
 /// Funkcja zwracająca stringa reprezentującego typ inforamcji
-string Info::getType()
+string Info::getType()const
 {
 	return _type;
 }

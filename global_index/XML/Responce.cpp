@@ -1,5 +1,7 @@
 #include "Response.h"
 #include "Monitor.h"
+#include <sstream>
+
 using namespace std;
 
 Response::Response():_id(0)
@@ -21,7 +23,7 @@ void Response::setId(int id)
 }
 void Response::setId(string id)
 {
-   istringstream buffer(id);
+    istringstream buffer(id);
     buffer >>_id;
 }
 vector<Monitor*>& Response::getMonitor()
@@ -30,7 +32,7 @@ vector<Monitor*>& Response::getMonitor()
 }
 void Response::addMonitor(Monitor new_m)
 {
-    _mon.push_back(new_m);
+    _mon.push_back(&new_m);
 }
 void Response::setMonitors(vector <Monitor*> mon)
 {

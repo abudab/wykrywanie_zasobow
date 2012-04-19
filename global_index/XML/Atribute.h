@@ -13,15 +13,20 @@ class Atribute: public Info{
     public:
 		Atribute();
 		Atribute(std::string name, std::string type,std::string value);
+		Atribute(const Atribute& atrib);
+		Atribute(const Atribute* atrib);
 		virtual ~Atribute();
 
-		std::string  getName();
-		std::string  getValue();
+		std::string  getName()const;
+		std::string  getValue()const;
 		int          getValueI();
 
 		void setName(std::string name);
 		void setValue(int value);
 		void setValue(std::string value);
+
+
+
 
 private:
 		std::string _name;
