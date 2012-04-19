@@ -20,7 +20,7 @@ Monitor::~Monitor()
     int siz=_atrib.size();
     for(int i=0; i<siz; ++i)
     {
-        delete &_atrib[i];
+        delete _atrib[i];
 
     }
         _atrib.clear();
@@ -58,6 +58,7 @@ void Monitor::setAtribs(vector<Atribute*> new_a)
         delete _atrib[i];
 
     }
+    _atrib.clear();
     siz=new_a.size();
     //_atrib.
     for(int i=0; i<siz; ++i)
