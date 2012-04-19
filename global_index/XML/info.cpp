@@ -25,3 +25,11 @@ void Info::setType(string type)
 {
 	_type=type;
 }
+void Info::Copy(Info& data)
+{
+    _type=data.getType();
+}
+void Info::Copy(Info* data)
+{
+    _type=data->getType();
+}

@@ -45,8 +45,9 @@ void Monitor::setName(string name)
 /// \param atrib dodawany atrybut
 void Monitor::addAtrib(Atribute* atrib)
 {
-   // Atribute* ati=new Atribute(atrib);
-    _atrib.push_back(new Atribute(atrib));
+   Atribute* ati=new Atribute();
+   ati->Copy(atrib);
+    _atrib.push_back(ati);
 }
 /// Funkcja zamieniająca vektor atrybutów na nowy
 /// \param new_a wektor nowych atrybutów
@@ -63,7 +64,9 @@ void Monitor::setAtribs(vector<Atribute*> new_a)
     //_atrib.
     for(int i=0; i<siz; ++i)
     {
-        _atrib.push_back(new Atribute(new_a[i]));
+        Atribute* p=new Atribute();
+        p->Copy(new_a[i]);
+        _atrib.push_back(p);
     }
 
 }

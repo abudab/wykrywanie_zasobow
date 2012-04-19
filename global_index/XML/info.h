@@ -14,6 +14,8 @@ class Info
 		Info(std::string type);
 
 		virtual ~Info();
+		virtual void Copy(Info& data);
+		virtual void Copy(Info* data);
 
 		std::string getType()const;
 		void        setType(std::string type);

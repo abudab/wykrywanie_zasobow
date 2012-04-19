@@ -1,11 +1,15 @@
 #ifndef _COMPARE_H_
 #define _COMPARE_H_
-
+/////////////////////////////////////////////////////////
+/// \file Compare
+/// \author Monika Godzwon
+/// \brief  klasa Compare, dziedziczy po Info, zawiera informacje o sposobie porównania
+////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
 
 #include "info.h"
-
+/// \class Compare
 class Compare: public Info
 {
 public:
@@ -19,7 +23,8 @@ public:
     std::vector <Info*>& getInfo();
 
 	std::string toString();
-
+    virtual void Copy(Compare& atrib);
+    virtual void Copy(Compare* atrib);
 
 
 private:

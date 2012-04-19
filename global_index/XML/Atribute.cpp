@@ -56,14 +56,14 @@ void Atribute::setValue(string value)
 	_value=value;
 }
 /// Konstruktor kopiujący
-Atribute::Atribute(const Atribute& atrib)
+void Atribute::Copy( Atribute& atrib)
 {
         _name=atrib.getName();
         _type=atrib.getType();
         _value=atrib.getValue();
 
 }
-Atribute::Atribute(const Atribute* atrib)
+void Atribute::Copy( Atribute* atrib)
 {
         _name=atrib->getName();
         _type=atrib->getType();

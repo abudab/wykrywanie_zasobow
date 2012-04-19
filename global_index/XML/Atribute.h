@@ -13,9 +13,11 @@ class Atribute: public Info{
     public:
 		Atribute();
 		Atribute(std::string name, std::string type,std::string value);
-		Atribute(const Atribute& atrib);
-		Atribute(const Atribute* atrib);
+
+
 		virtual ~Atribute();
+		virtual void Copy(Atribute& atrib);
+		virtual void Copy(Atribute* atrib);
 
 		std::string  getName()const;
 		std::string  getValue()const;
@@ -24,9 +26,6 @@ class Atribute: public Info{
 		void setName(std::string name);
 		void setValue(int value);
 		void setValue(std::string value);
-
-
-
 
 private:
 		std::string _name;
