@@ -1,21 +1,41 @@
-
-
 #include "Search.h"
 #include <sstream>
 using namespace std;
 
 ///Konstruktor domyslny klasy Search
-Search::Search()
+Search::Search():_name("non"), _id(0)
 {
-//rezerwacja pamieci na Filtr i Compare
+    vector<Compare*> w;
+    _comp=w;
+    vector<string*> s;
+    _filters=s;
 }
-Search::Search(string a)
+Search::Search(string xml):_name("non"), _id(0)
 {
+    vector<Compare*> w;
+    _comp=w;
+    vector<string*> s;
+    _filters=s;
 //rezerwacja pamieci na Filtr i Compare -> zliczyc ilosc nodow w xml_dokument
-//pobraz informacje o nazwie i id
+
 }
 Search::~Search()
 {
+    int siz=_comp.size();
+    for(int i=0; i<siz; ++i)
+    {
+        delete _comp[i];
+
+    }
+    _comp.clear();
+    siz=_filters.size();
+    for(int i=0; i<siz; ++i)
+    {
+        delete _filters[i];
+
+    }
+    _filters.clear();
+
 //zwolnienie pamieci z Filtr i Compare
 }
 string Search::getName()
@@ -47,13 +67,17 @@ void Search::setId(string n)
  buffer >>_id;
 
 }
-void Search::addFilter(Filter){
-//zarezerwowanie pamieci o 1 element wiecej , przepisanei tablicy i ewntualna inkrementacja licznika elementów
-//zwolnienie pamiêci
+void Search::addFilter(Filter* f)
+{
+    string* s=new string();
+    s=f;
+    _filters.push_back(s);
 }
-void Search::addCompare(Compare ){
-//zarezerwowanie pamieci o 1 element wiecej , przepisanei tablicy i ewntualna inkrementacja licznika elementów
-//zwolnienie pamiêci
+void Search::addCompare(Compare* add_c)
+{
+    Compare* com=new Compare();
+    com->Copy(add_c);
+    _comp.push_back(com);
 }
 vector <Filter*>& Search::getFilters()
 {

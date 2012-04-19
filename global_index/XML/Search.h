@@ -35,8 +35,8 @@ class Search{
 		void setName(std::string name);
 		void setId(int id);
 		void setId(std::string id);
-		void addFilter(Filter filt);
-		void addCompare(Compare com);
+		void addFilter(Filter* filt);
+		void addCompare(Compare* com);
 		void setCompare(std::vector<Compare*> comp);
 		void setFilters(std::vector<Filter*> filter);
 		void loadS(std::string xml);// pobiera XML
