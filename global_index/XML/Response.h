@@ -20,12 +20,13 @@ class Response{
 	public:
 		Response();
 		Response(int id,std::vector <Monitor*> mon);
+		~Response();
 
 		int getId();
 		void setId(int id);
 		void setId(std::string id );
 		std::vector <Monitor*>& getMonitor();
-		void addMonitor(Monitor new_m);
+		void addMonitor(Monitor* new_m);
 		void setMonitors(std::vector <Monitor*> mon);
 
 		std::string toXML();

@@ -24,6 +24,8 @@ class Monitor{
 		void setName(std::string name);
 		void addAtrib(Atribute* atrib);
 		void setAtribs(std::vector <Atribute*> new_atrib);
+		void Copy(Monitor* m);
+		void Copy(Monitor& m);
 
     private:
 		std::string _name;

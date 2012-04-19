@@ -70,3 +70,13 @@ void Monitor::setAtribs(vector<Atribute*> new_a)
     }
 
 }
+void Monitor::Copy(Monitor* m)
+{
+    _name=m->getName();
+    setAtribs(m->getAtrib());
+}
+void Monitor::Copy(Monitor& m)
+{
+    _name=m.getName();
+    setAtribs(m.getAtrib());
+}
