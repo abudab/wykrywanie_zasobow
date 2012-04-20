@@ -1,9 +1,3 @@
-#ifdef _DLL
-#define PUGIXML_API __declspec(dllexport)
-#else
-#define PUGIXML_API __declspec(dllimport)
-#endif
-
 #include "Compare.h"
 
 /////////////////////////////////////////////////////////
@@ -17,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include "../pugi/pugixml.hpp"
 #define Filter std::string
 class Search{
 //pugi::xml_document a;
@@ -46,6 +41,7 @@ private:
 		int _id;
 		std::vector<Filter*> _filters;
 		std::vector<Compare*> _comp;
+		void readC(Compare* c, pugi::xml_node);
 };
 
 #endif
