@@ -62,7 +62,33 @@ void Response::setMonitors(vector <Monitor*> mon)
     }
 
 }
-string Response::toXML() //TO DO
+string Response::toXML()
 {
-    return "xml";
+    string xml="<Response id='";
+    stringstream ss;
+    ss << _id;
+    xml+=ss.str();
+    xml+="'>";
+    int m_size=_mon.size();
+    for(int i=0;i<m_size;++i)
+    {
+        xml+="<Monitor name='";
+        xml+=_mon[i]->getName();
+        xml+="'>";
+        vector<Atribute*> ats=_mon[i]->getAtrib();
+        int at_size=ats.size();
+        for(int j=0;j<at_size;++j)
+        {
+            xml+="<Atrybute name='";
+            xml+=ats[j]->getName();
+            xml+="' compType='";
+            xml+=ats[j]->getType();
+            xml+="' value='";
+            xml+=ats[j]->getValue();
+            xml+="' />";
+        }
+        xml+="</Monitor>";
+    }
+    xml+="</Response>";
+    return xml;
 }

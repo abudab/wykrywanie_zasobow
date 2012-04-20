@@ -30,8 +30,6 @@ public:
 private:
 	std::vector<Info*> _data;
 
-
-
 };
 
 #endif
