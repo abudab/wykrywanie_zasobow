@@ -70,11 +70,13 @@ void Monitor::setAtribs(vector<Atribute*> new_a)
     }
 
 }
+/// Funkcja kopiująca obiekt
 void Monitor::Copy(Monitor* m)
 {
     _name=m->getName();
     setAtribs(m->getAtrib());
 }
+/// Funkcja kopiująca obiekt
 void Monitor::Copy(Monitor& m)
 {
     _name=m.getName();

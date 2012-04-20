@@ -55,7 +55,7 @@ void Atribute::setValue(string value)
 {
 	_value=value;
 }
-/// Konstruktor kopiujący
+/// Funkcja kopiująca obiekt
 void Atribute::Copy( Atribute& atrib)
 {
         _name=atrib.getName();
@@ -63,6 +63,7 @@ void Atribute::Copy( Atribute& atrib)
         _value=atrib.getValue();
 
 }
+/// Funkcja kopiująca obiekt
 void Atribute::Copy( Atribute* atrib)
 {
         _name=atrib->getName();

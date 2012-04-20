@@ -14,12 +14,9 @@
 #include "../pugi/pugixml.hpp"
 #define Filter std::string
 class Search{
-//pugi::xml_document a;
-
-
 	public:
 		Search();
-		Search(std::string xml);//pobiera XML
+		Search(std::string xml);
 		~Search();
 		std::string getName();
 		std::string getId();

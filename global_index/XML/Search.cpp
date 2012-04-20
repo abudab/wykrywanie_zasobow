@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace pugi;
-///Konstruktor domyslny klasy Search
+///Konstruktor domyslny klasy Search nadaje _name="non" i _id=0
 Search::Search():_name("non"), _id(0)
 {
     vector<Compare*> w;
@@ -16,6 +16,8 @@ Search::Search():_name("non"), _id(0)
     _filters=s;
 
 }
+/// Konstruktor tworzący obiekt klasy search z zapytania xml
+/// \param xml zapytanie XML w postaci string
 Search::Search(string xml)
 {
     vector<Compare*> w;
@@ -70,6 +72,7 @@ Search::Search(string xml)
        _comp.push_back(nc);
     }
 }
+/// Destruktor
 Search::~Search()
 {
     int siz=_comp.size();
@@ -88,28 +91,36 @@ Search::~Search()
     _filters.clear();
 
 }
+/// Funkcja zwracająca nazwę zapytania
 string Search::getName()
 {
 	return _name;
 }
+/// Funkcja zwracająca id zapytania jako string
 string Search::getId()
 {
 	stringstream ss;//create a stringstream
     ss << _id;
     return ss.str();//return a string
 }
+/// Funkcja zwracająca id zapytania jako int
 int Search::getIdI()
 {
 	return _id;
 }
+/// Funkcja nadająca nowa nazwę zapytania
 void Search::setName(string n)
 {
 	_name=n;
 }
+/// Funkcja nadające nowe id zapytania
+/// \param value wartość int nadawana id zapytania
 void Search::setId(int value)
 {
 	_id=value;
 }
+/// Funkcja nadające nowe id zapytania
+/// \param n wartość string konwertowana do int i przypisywana do id zapytania
 void Search::setId(string n)
 {
 
@@ -117,26 +128,34 @@ void Search::setId(string n)
  buffer >>_id;
 
 }
+/// Funkcja dodająca nowy filtr
+/// \param f wskaźnik do dodawanego filtru
 void Search::addFilter(Filter* f)
 {
     string* s=new string();
     s=f;
     _filters.push_back(s);
 }
+/// Funkcja dodająca nowe porównanie
+/// \param add_c wskaźnik do nowego porównania, które zostanie dodane do zapytania(dodajemy kopię elementu)
 void Search::addCompare(Compare* add_c)
 {
     Compare* com=new Compare();
     com->Copy(add_c);
     _comp.push_back(com);
 }
+/// Funkcja zwracająca referencję do wektora reprezentującego szukanych filtrów
 vector <Filter*>& Search::getFilters()
 {
 	return _filters;
  }
+ /// Funkcja zwracająca referencję do wektora wskaźników do szukanych porównań
 vector<Compare*>& Search::getComp()
 {
     return _comp;
 }
+/// Funkcja pozwalająca załadować nowe zapytanie - obiekt reprezentuje drzewo nowego zapytani xml
+/// \param xml nowe zapytanie XML
 void Search::loadS(std::string xml)
 {
     //wykasowanie istniejacego wzorca
@@ -199,6 +218,7 @@ void Search::loadS(std::string xml)
        _comp.push_back(nc);
     }
 }
+/// Funkcja pomocnicza do wczytywania elementów Compare, poniewaz nie znamy głębokości ich rekurencji
 void Search::readC(Compare* c, xml_node node)
 {
     for(xml_node com=node.child("Compare"); com; com=com.next_sibling("Compare"))

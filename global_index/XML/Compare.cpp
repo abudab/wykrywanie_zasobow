@@ -70,11 +70,13 @@ void Compare::setInfo(vector<Info*> data)
 
     }
 }
+/// Funkcja pomocnicza pozwalająca uzyskać kopię obiektu
 void Compare::Copy(Compare& com)
 {
     _type=com.getType();
     setInfo(com.getInfo());
 }
+/// Funkcja pomocnicza pozwalająca uzyskać kopię obiektu
 void Compare::Copy(Compare* com)
 {
     _type=com->getType();

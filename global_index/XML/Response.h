@@ -1,18 +1,12 @@
 #ifndef _Response_H_
 #define _Response_H_
-
-
-
 #include <string>
 #include <vector>
-
-/////////////////////////////////////////////////////////
+//// /////////////////////////////////////////////////////
 /// \file Response
 /// \author Monika Godzwon
-/// \brief  klasa Responce reprezentujaca odpowiedz XML monitorow w postaci drzewa
-////////////////////////////////////////////////////////
-
-
+/// \brief  klasa Responce reprezentujaca odpowiedz monitorow w postaci drzewa
+/// /////////////////////////////////////////////////////
 #include "Monitor.h"
 
 class Response{

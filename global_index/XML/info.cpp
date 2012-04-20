@@ -25,10 +25,12 @@ void Info::setType(string type)
 {
 	_type=type;
 }
+/// Funkcja kopiująca obiekt klasy
 void Info::Copy(Info& data)
 {
     _type=data.getType();
 }
+/// Funkcja kopiująca obiekt klasy
 void Info::Copy(Info* data)
 {
     _type=data->getType();
