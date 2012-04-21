@@ -266,3 +266,21 @@ void Search::setCompare(vector<Compare*> comp)
         _comp.push_back(c);
     }
 }
+void Search::setFilters(vector<string*> comp)
+{
+    int siz=_filters.size();
+    for(int i=0; i<siz; ++i)
+    {
+        delete _filters[i];
+
+    }
+    _filters.clear();
+    siz=comp.size();
+    for(int i=0; i<siz; ++i)
+    {
+
+        string* c=new string(comp[i]->c_str());
+
+        _filters.push_back(c);
+    }
+}
