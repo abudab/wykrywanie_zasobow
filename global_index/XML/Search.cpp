@@ -249,4 +249,20 @@ void Search::readC(Compare* c, xml_node node)
     }
 
 }
+void Search::setCompare(vector<Compare*> comp)
+{
+    int siz=_comp.size();
+    for(int i=0; i<siz; ++i)
+    {
+        delete _comp[i];
 
+    }
+    _comp.clear();
+    siz=comp.size();
+    for(int i=0; i<siz; ++i)
+    {
+        Compare* c=new Compare();
+        c->Copy(comp[i]);
+        _comp.push_back(c);
+    }
+}
