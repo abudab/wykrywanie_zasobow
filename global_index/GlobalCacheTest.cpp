@@ -21,7 +21,6 @@
 int main(){
   
   GlobalCache gc = GlobalCache();
-  gc.getData();
-
+  gc.getResponse( 666 );
   return 0;
 }
