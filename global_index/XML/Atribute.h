@@ -18,6 +18,7 @@ class Atribute: public Info{
 		virtual ~Atribute();
 		virtual void Copy(Atribute& atrib);
 		virtual void Copy(Atribute* atrib);
+		virtual Atribute* Copy();
 
 		std::string  getName()const;
 		std::string  getValue()const;

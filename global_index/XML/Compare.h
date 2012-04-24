@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "info.h"
+#include "Atribute.h"
 /// \class Compare
 class Compare: public Info
 {
@@ -18,14 +19,15 @@ public:
 	Compare(std::string type, std::vector<Info*> data);
 	virtual ~Compare();
 
-	void addInfo(Info* data);
+	void addInfo(Atribute* data);
+	void addInfo(Compare* data);
 	void setInfo(std::vector<Info*> data);
     std::vector <Info*>& getInfo();
 
 	std::string toString();
     virtual void Copy(Compare& atrib);
     virtual void Copy(Compare* atrib);
-
+    virtual Compare* Copy();
 
 private:
 	std::vector<Info*> _data;

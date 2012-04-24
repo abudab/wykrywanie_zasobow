@@ -3,7 +3,7 @@
 #include <sstream>
 #include "../pugi/pugixml.hpp"
 //#include "../pugi/pugiconfig.hpp"
-
+#include <iostream>
 
 using namespace std;
 using namespace pugi;
@@ -51,23 +51,11 @@ Search::Search(string xml)
        //elementy atribute
        string type=com.attribute("type").value();
        nc->setType(type);
+        //read atribute
 
-       for(xml_node atrib=com.child("Atrybute"); atrib;atrib=atrib.next_sibling("Atrybute"))
-       {
-           Atribute* at=new Atribute();
-           at->setName(atrib.attribute("name").value());
-           //compType
-           at->setType(atrib.attribute("compType").value());
-           at->setValue(atrib.attribute("value").value());
-           nc->addInfo(at);
-       }
-       for(xml_node com2=com.child("Compare");com2;com2=com2.next_sibling("Compare"))
-      {
-          Compare* cc=new Compare();
-          cc->setType(com2.attribute("type").value());
-          readC(cc, com2);
-          nc->addInfo(cc);
-      }
+       //read Compare
+       readC(com,nc);
+       readA(com, nc);
 
        _comp.push_back(nc);
     }
@@ -197,29 +185,33 @@ void Search::loadS(std::string xml)
     for(xml_node com=data.child("Compare"); com; com=com.next_sibling("Compare"))
     {
         Compare* nc=new Compare();
+         string type=com.attribute("type").value();
+       nc->setType(type);
        //elementy atribute
-       for(xml_node atrib=com.child("Atrybute"); atrib;atrib=atrib.next_sibling("Atrybute"))
+        //read atribute
+
+       //read Compare
+       readC(com,nc);
+       readA(com, nc);
+
+       _comp.push_back(nc);
+    }
+}
+/// Funkcja pomocnicza do wczytywania elementów Compare, poniewaz nie znamy głębokości ich rekurencji
+void Search::readA(xml_node node,Compare* c)
+{
+    for(xml_node atrib=node.child("Atrybute"); atrib;atrib=atrib.next_sibling("Atrybute"))
        {
            Atribute* at=new Atribute();
            at->setName(atrib.attribute("name").value());
            //compType
            at->setType(atrib.attribute("compType").value());
            at->setValue(atrib.attribute("value").value());
-           nc->addInfo(at);
-       }
-       for(xml_node com2=com.child("Compare");com2;com2=com2.next_sibling("Compare"))
-      {
-          Compare* cc=new Compare();
-          cc->setType(com2.attribute("type").value());
-          readC(cc, com2);
-          nc->addInfo(cc);
-      }
 
-       _comp.push_back(nc);
-    }
+           c->addInfo(at);
+       }
 }
-/// Funkcja pomocnicza do wczytywania elementów Compare, poniewaz nie znamy głębokości ich rekurencji
-void Search::readC(Compare* c, xml_node node)
+void Search::readC(xml_node node,Compare* c)
 {
     for(xml_node com=node.child("Compare"); com; com=com.next_sibling("Compare"))
     {
@@ -228,23 +220,17 @@ void Search::readC(Compare* c, xml_node node)
        string type=com.attribute("type").value();
        nc->setType(type);
 
-       for(xml_node atrib=com.child("Atrybute"); atrib;atrib=atrib.next_sibling("Atrybute"))
+       readA(com, nc);
+       //read Compare
+       readC(com,nc);
+       vector<Info*> in=nc->getInfo();
+       int k=in.size();
+     /*  cout<<"Compare:"<<endl;
+       for(int i=0;i<k;++i)
        {
-           Atribute* at=new Atribute();
-           at->setName(atrib.attribute("name").value());
-           //compType
-           at->setType(atrib.attribute("compType").value());
-           at->setValue(atrib.attribute("value").value());
-           nc->addInfo(at);
-       }
-       for(xml_node com2=com.child("Compare");com2;com2=com2.next_sibling("Compare"))
-      {
-          Compare* cc=new Compare();
-          cc->setType(com2.attribute("type").value());
-          readC(cc, com2);
-          nc->addInfo(cc);
-      }
-
+           Atribute* ati=(Atribute*)(nc->getInfo()[i]);
+           cout<<ati->getType()<<" ,"<<ati->getName()<<ati->getValue()<<endl;
+       }*/
        _comp.push_back(nc);
     }
 

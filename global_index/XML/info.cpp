@@ -35,3 +35,8 @@ void Info::Copy(Info* data)
 {
     _type=data->getType();
 }
+Info* Info::Copy()
+{
+    Info* wyn=new Info(_type);
+    return wyn;
+}

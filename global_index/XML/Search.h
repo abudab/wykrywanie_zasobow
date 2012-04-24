@@ -38,7 +38,8 @@ private:
 		int _id;
 		std::vector<Filter*> _filters;
 		std::vector<Compare*> _comp;
-		void readC(Compare* c, pugi::xml_node);
+		void readC(pugi::xml_node,Compare* c);
+		void readA( pugi::xml_node, Compare* c);
 };
 
 #endif

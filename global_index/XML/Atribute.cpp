@@ -71,3 +71,8 @@ void Atribute::Copy( Atribute* atrib)
         _value=atrib->getValue();
 
 }
+Atribute* Atribute::Copy()
+{
+    Atribute* wyn=new Atribute(_name,_type,_value);
+    return wyn;
+}

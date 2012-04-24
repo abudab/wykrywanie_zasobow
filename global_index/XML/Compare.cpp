@@ -37,9 +37,15 @@ Compare::~Compare()
 }
 /// Funkcja dodająca kolejną przechowywaną informację
 /// \param data wskaźnik na obiekt klasy Info, dodawany do danych Compare
-void Compare::addInfo(Info* data)
+void Compare::addInfo(Atribute* data)
 {
-    Info* s=new Info();
+    Atribute* s=new Atribute();
+    s->Copy(data);
+    _data.push_back(s);
+}
+void Compare::addInfo(Compare* data)
+{
+    Compare* s=new Compare();
     s->Copy(data);
     _data.push_back(s);
 }
@@ -81,4 +87,9 @@ void Compare::Copy(Compare* com)
 {
     _type=com->getType();
     setInfo(com->getInfo());
+}
+Compare* Compare::Copy()
+{
+    Compare* wyn=new Compare(_type, _data);
+    return wyn;
 }
