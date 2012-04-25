@@ -13,7 +13,7 @@
 	{
 	    int ok=0;
 	    int fail=0;
-	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPUfrequency' compType='>=' value='1.0GHz' /><Compare type='xxx'><Atrybute name='CPUfrequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='CPUfrequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEMCount' compType='>=' value='4GB' /></Compare></Data></Search>");
+	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPUfrequency' compType='>=' value='1.0GHz' /><Atrybute name='CPUfrequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEMCount' compType='>=' value='4GB' /></Compare></Data></Search>");
 	    cout<<"Konstruktor domyslny -> ";
 	    Search sz;
 	    if(sz.getName()!="")
@@ -179,11 +179,32 @@
             for(int i=0;i<r;++i)
             {
                 cout<<"           type: "<<vc2[i]->getType()<<" ,"<<vc2[i]->getInfo().size()<<":"<<endl;
-
-                for(int j=0;j<vc2[i]->getInfo().size();++j)
+                vector<Info*> info1=vc2[i]->getInfo();
+               for(int j=0;j<vc2[i]->getInfo().size();++j)
                 {
-                Atribute* ati=(Atribute*)(vc2[i]->getInfo()[j]);
-                cout<<"                 ->"<<ati->getName()<<", "<<ati->getValue()<<endl;
+                  cout<<info1[j]->getType()<<endl;
+                  if(j==0)
+                  {
+                    Compare* ccc=(Compare*)(vc2[i]->getInfo()[0]);
+                    ccc->getInfo();
+                    cout<<" ma:"<<ccc->getInfo().size()<<" elementy:"<<endl;
+                    int pp=ccc->getInfo().size();
+                    for(int ii=0;ii<pp;++ii)
+                    {
+                        cout<<"         -> "<<ccc->getInfo()[ii]->getType() <<endl;
+
+                    Atribute* aabb=(Atribute*)(ccc->getInfo()[ii]);
+                    cout<<"NIE MOGE ZRZUTOWAC NA ATRIBUTE"<<endl;
+                     // cout<<aabb->getName()<<" value:"<<aabb->getValue();
+                    }
+
+                  }
+                  else
+                  {
+                      Atribute* aaaa=(Atribute*)(vc2[i]->getInfo()[1]);
+                      cout<<aaaa->getName()<<" value:"<<aaaa->getValue();
+                  }
+
                 }
                 cout<<endl;
 
@@ -196,6 +217,7 @@
 	        ++fail;
 	        cout<<"NIC"<<endl;
 	    }
+
 
     cout<<endl<<"Przeprowadzono "<<fail+ok<<" testów, gdzie:"<<endl<<"-> Poprawnych: "<<ok<<endl<<"-> Niepoprawnych: "<<fail<<endl;
 	    return 0;

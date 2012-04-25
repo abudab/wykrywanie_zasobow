@@ -223,15 +223,8 @@ void Search::readC(xml_node node,Compare* c)
        readA(com, nc);
        //read Compare
        readC(com,nc);
-       vector<Info*> in=nc->getInfo();
-       int k=in.size();
-     /*  cout<<"Compare:"<<endl;
-       for(int i=0;i<k;++i)
-       {
-           Atribute* ati=(Atribute*)(nc->getInfo()[i]);
-           cout<<ati->getType()<<" ,"<<ati->getName()<<ati->getValue()<<endl;
-       }*/
-       _comp.push_back(nc);
+
+       c->addInfo(nc);
     }
 
 }

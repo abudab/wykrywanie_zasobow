@@ -3,6 +3,7 @@
 #include <sstream>
 #include "../pugi/pugiconfig.hpp"
 #include "../pugi/pugixml.hpp"
+#include <iostream>
 using namespace std;
 /// Komstruktor domyślny generuje pusty wektor wskaźników do Info i _type="non"
 Compare::Compare():Info()
