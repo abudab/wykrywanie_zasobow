@@ -12,6 +12,7 @@ class Info
 	public:
 		Info();
 		Info(std::string type);
+		Info(Info& original);
 
 		virtual ~Info();
 		virtual void Copy(Info& data);

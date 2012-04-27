@@ -35,8 +35,14 @@ void Info::Copy(Info* data)
 {
     _type=data->getType();
 }
+///Funkcja zwracajaca wskaźnik do kopi obiektu
 Info* Info::Copy()
 {
     Info* wyn=new Info(_type);
     return wyn;
+}
+///Przeładowanie konstruktora kopiujacego
+Info::Info(Info& original)
+{
+    _type=original.getType();
 }

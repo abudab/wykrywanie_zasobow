@@ -12,6 +12,13 @@ Atribute::Atribute():Info(),_name("atrib"),  _value("0")
 Atribute::Atribute(string name, string type,string value): Info(type),_name(name), _value(value)
 {
 }
+/// Konstruktor kopiujacy
+Atribute::Atribute(Atribute& org)
+{
+    _type=org.getType();
+    _name=org.getName();
+    _value=org.getValue();
+}
 /// Destruktor
 Atribute::~Atribute()
 {
@@ -71,6 +78,7 @@ void Atribute::Copy( Atribute* atrib)
         _value=atrib->getValue();
 
 }
+/// Funkcja kopiujaca zwracająca wskaźnik do nowego obiektu90`12
 Atribute* Atribute::Copy()
 {
     Atribute* wyn=new Atribute(_name,_type,_value);

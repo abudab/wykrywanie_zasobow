@@ -27,9 +27,12 @@ int main()
     cout<<"Konstruktor od stringa i wektora atrybutów -> ";
     string s1="mon1";
     Monitor m1(s1,k);
-    if(s1==m1.getName()&&!k.empty())
+    if(s1==m1.getName()&&m1.getAtrib().size()==k.size())
     {
         ++ok;
+        int it=m1.getAtrib().size();
+        for(int i=0;i<it;++i)
+            cout<<m1.getAtrib()[i]->getValue()<<endl;
         cout<<"OK"<<endl;
     }
     else
@@ -65,9 +68,10 @@ int main()
         cout<<"FAIL"<<endl;
     }
 
-
-    k2=(m.getAtrib());
     m.addAtrib(at);
+
+    k2=(m1.getAtrib());
+
     at->setName("nnn");
     m.addAtrib(at);
     int r=m.getAtrib().size();
@@ -76,6 +80,9 @@ int main()
     if(m.getAtrib().size()!=r&&m.getAtrib().size()==k2.size())
     {
         ++ok;
+        int it=m.getAtrib().size();
+        for(int i=0;i<it;++i)
+            cout<<m.getAtrib()[i]->getValue()<<endl;
         cout<<"OK"<<endl;
     }
     else
@@ -112,3 +119,4 @@ int main()
     cout<<endl<<"Przeprowadzono "<<failed+ok<<" testów, gdzie:"<<endl<<"-> Poprawnych: "<<ok<<endl<<"-> Niepoprawnych: "<<failed<<endl;
     return 0;
 }
+

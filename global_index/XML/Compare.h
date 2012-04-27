@@ -17,6 +17,7 @@ public:
 	Compare();
 	Compare(std::string type);
 	Compare(std::string type, std::vector<Info*> data);
+	Compare(Compare& org);
 	virtual ~Compare();
 
 	void addInfo(Atribute* data);

@@ -4,8 +4,6 @@ using namespace std;
 /// Konstruktor domyślny nadający monitorowi nazwę "new_M"
 Monitor::Monitor():_name("new_M")
 {
-    vector<Atribute*> k;
-    _atrib=k;
 }
 /// Konstruktor zależny od dwóch parametrów name i atrib
 /// \param name string przypisywany jako nazwa atrybutu
@@ -45,8 +43,7 @@ void Monitor::setName(string name)
 /// \param atrib dodawany atrybut
 void Monitor::addAtrib(Atribute* atrib)
 {
-   Atribute* ati=new Atribute();
-   ati->Copy(atrib);
+   Atribute* ati=new Atribute(*atrib);
     _atrib.push_back(ati);
 }
 /// Funkcja zamieniająca vektor atrybutów na nowy
@@ -64,8 +61,7 @@ void Monitor::setAtribs(vector<Atribute*> new_a)
     //_atrib.
     for(int i=0; i<siz; ++i)
     {
-        Atribute* p=new Atribute();
-        p->Copy(new_a[i]);
+        Atribute* p=new Atribute(*new_a[i]);
         _atrib.push_back(p);
     }
 

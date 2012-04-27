@@ -13,6 +13,7 @@ class Atribute: public Info{
     public:
 		Atribute();
 		Atribute(std::string name, std::string type,std::string value);
+		Atribute(Atribute& org);
 
 
 		virtual ~Atribute();

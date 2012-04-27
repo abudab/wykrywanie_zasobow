@@ -1,225 +1,155 @@
 #include <iostream>
-	#include <typeinfo>
-	#include "pugi/pugiconfig.hpp"
-	#include "pugi/pugixml.hpp"
 	using namespace std;
-	//#include "XML/Monitor.h"
+	#include "XML/Atribute.h"
 	#include <vector>
-	#include "XML/Response.h"
-	#include "XML/Search.h"
-	//
-	//using namespace pugi;
 	int main()
 	{
+	    //Dwa rodzaje konstruktorów
 	    int ok=0;
 	    int fail=0;
-	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPUfrequency' compType='>=' value='1.0GHz' /><Atrybute name='CPUfrequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEMCount' compType='>=' value='4GB' /></Compare></Data></Search>");
-	    cout<<"Konstruktor domyslny -> ";
-	    Search sz;
-	    if(sz.getName()!="")
+	    cout<<"TESTY KLASY ATRIBUTE"<<endl<<endl;
+	    cout<<"Konstruktor domyślny ->";
+	    Atribute at;
+	    if(at.getName()!="")
 	    {
 	        ++ok;
-	        cout<<"OK :"<<sz.getName()<<","<<sz.getId()<<endl;
+	        cout<<"OK"<<endl<<"Atrybut o wartosciach: "<<at.getName()<<", "<<at.getValue() << ", "<<at.getType()<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"FAIL "<<endl;
+	        cout<<"FAIL"<<endl;
 
 	    }
-	    Search szuka;
-		string s1("szukam");
-		cout<<"Nadanie nazwy -> ";
-		szuka.setName(s1);
-		if(s1==szuka.getName())
-		{
+	    cout<<"Konstruktor od 3 stringow ->";
+	    string s1("CPU"), s2("cc"), s3("8");
+	    Atribute at2(s1, s2,s3);
+	    if(at2.getName()==s1&&at2.getType()==s2&&at2.getValue()==s3)
+	    {
 	        ++ok;
-	        cout<<"OK :"<<sz.getName()<<endl;
+	        cout<<"OK"<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"FAIL "<<endl;
-
+	        cout<<"FAIL"<<endl;
 	    }
-		int id_n=60;
-		cout<<"Nadanie nowej wartości id -> ";
-		szuka.setId(id_n);
-		if(szuka.getIdI()==id_n)
-		{
+
+	    cout<<"zmiana wartości Value poprzez string-> ";
+	    string s4("6");
+	    at.setValue(s4);
+	    if(at.getValue()==s4)
+	    {
 	        ++ok;
-	        cout<<"OK :"<<szuka.getId()<<endl;
+	        cout<<"OK"<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"FAIL "<<szuka.getId()<<endl;
-
+	        cout<<"FAIL"<<endl;
 	    }
-	    Atribute* at=new Atribute();
-        vector<Atribute*> k;
-        k.push_back(at);
-        vector<Atribute> k2;
-	    Monitor m;
-
-		Monitor m1("mon1",k);
-		m1.addAtrib(at);
-        m.addAtrib(at);
-		m.addAtrib(at);
-		m.addAtrib(at);
-		at->setName("nnn");
-		m.addAtrib(at);
-        Response rr;
-		rr.addMonitor(&m);
-		rr.addMonitor(&m);
-		rr.addMonitor(&m1);
-		vector<Monitor*> mov=rr.getMonitor();
-		Response rr1(3,mov);
-		int r=mov.size();
-		Compare c;
-		    c.addInfo(at);
-		    at->setType("xxx");
-		    c.addInfo(at);
-		    vector<Info*> n=c.getInfo();
-		     r=n.size();
-		 Compare c2;
-		    c2.Copy(c);
-		    c2.addInfo(at);
-		    c2.addInfo(&c);
-        int siz=szuka.getComp().size();
-        cout<<"Dodanie porównania -> ";
-        szuka.addCompare(&c2);
-
-        if(szuka.getComp().size()>siz)
-        {
+	    cout<<"urzycie value jako int ->";
+	    int w= at.getValueI() + at2.getValueI();
+	    if(w==14)
+	    {
 	        ++ok;
-	        cout<<"OK "<<endl;
+	        cout<<"OK"<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"FAIL "<<endl;
-
+	        cout<<"FAIL"<<endl;
 	    }
-		szuka.addCompare(&c);
+	    cout<<"nadanie nowej nazwy ->";
+	    string s5("naowa_nazwa");
+	    at.setName(s5);
+	    if(s5==at.getName())
+	    {
 
-		string* napis=new string("napis");
-		siz=szuka.getFilters().size();
-		cout<<"Dodanie filtra -> ";
-		szuka.addFilter(napis);
-		if(szuka.getFilters().size()>siz)
-		{
 	        ++ok;
-	        cout<<"OK "<<endl;
+	        cout<<"OK"<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"FAIL "<<endl;
-
+	        cout<<"FAIL"<<endl;
 	    }
-	    //setCompare
-	    vector<Compare* > c_vec;
-	    c_vec.push_back(&c);
-	    c_vec.push_back(&c2);
-	    c_vec.push_back(&c);
-	    c_vec.push_back(&c);
-	    c_vec.push_back(&c2);
-        siz=szuka.getComp().size();
-        cout<<"Wstawienie nowego wektora porównań -> ";
-        szuka.setCompare(c_vec);
-        if(szuka.getComp().size()!=siz)
-        {
-	        ++ok;
-	        cout<<"OK "<<endl;
-	    }
-	    else
+	    cout<<"nadanie nowej wartości za pomocą int->";
+	    int val=300;
+	    at.setValue(val);
+	    if(at.getValueI()==val)
 	    {
 
-	        ++fail;
-	        cout<<"FAIL "<<endl;
-
-	    }
-	    //setFilters
-        vector<string*> fil_v;
-        siz=szuka.getFilters().size();
-        cout<<"ustawienie niwych filtrów -> ";
-        szuka.setFilters(fil_v);
-        if(siz!=szuka.getFilters().size())
-        {
 	        ++ok;
-	        cout<<"OK "<<endl;
-	    }
-	    else
-	    {
-
-	        ++fail;
-	        cout<<"FAIL "<<endl;
-
-	    }
-	    cout<<"Konstruktor zależny od striga zawierającego XMLa -> ";
-	    Search szuka2(xml);
-	    if(szuka2.getName()!=""&&szuka2.getIdI()>0)
-	    {
-	        ++ok;
-	        cout<<endl<<"  --> utworzony obiekt o nazwie:"<<szuka2.getName()<<" i id: "<<szuka2.getId()<<endl;
-            cout<<"  --> z filtrami:"<<endl;
-            vector<string*> vs=szuka2.getFilters();
-            r=vs.size();
-            for(int i=0;i<r;++i)
-            {
-            string ns=(*vs[i]);
-            cout<<"         "<<ns<<endl;
-            }
-            cout<<"  --> z ";
-
-            vector<Compare*> vc2=szuka2.getComp();
-            cout<<vc2.size()<<" elementami porównawczymi:"<<endl;
-            r=vc2.size();
-            for(int i=0;i<r;++i)
-            {
-                cout<<"           type: "<<vc2[i]->getType()<<" ,"<<vc2[i]->getInfo().size()<<":"<<endl;
-                vector<Info*> info1=vc2[i]->getInfo();
-               for(int j=0;j<vc2[i]->getInfo().size();++j)
-                {
-                  cout<<info1[j]->getType()<<endl;
-                  if(j==0)
-                  {
-                    Compare* ccc=(Compare*)(vc2[i]->getInfo()[0]);
-                    ccc->getInfo();
-                    cout<<" ma:"<<ccc->getInfo().size()<<" elementy:"<<endl;
-                    int pp=ccc->getInfo().size();
-                    for(int ii=0;ii<pp;++ii)
-                    {
-                        cout<<"         -> "<<ccc->getInfo()[ii]->getType() <<endl;
-
-                    Atribute* aabb=(Atribute*)(ccc->getInfo()[ii]);
-                    cout<<"NIE MOGE ZRZUTOWAC NA ATRIBUTE"<<endl;
-                     // cout<<aabb->getName()<<" value:"<<aabb->getValue();
-                    }
-
-                  }
-                  else
-                  {
-                      Atribute* aaaa=(Atribute*)(vc2[i]->getInfo()[1]);
-                      cout<<aaaa->getName()<<" value:"<<aaaa->getValue();
-                  }
-
-                }
-                cout<<endl;
-
-
-            }
-
+	        cout<<"OK"<<endl;
 	    }
 	    else
 	    {
 	        ++fail;
-	        cout<<"NIC"<<endl;
+	        cout<<"FAIL"<<endl;
+	    }
+	    cout<<"nadanie nowego typu->";
+	    string s6("new_type");
+	    at.setType(s6);
+	    if(s6==at.getType())
+	    {
+	        ++ok;
+	        cout<<"OK"<<endl;
+	    }
+	    else
+	    {
+	        ++fail;
+	        cout<<"FAIL"<<endl;
 	    }
 
+	    cout<<"kopiowanie ->";
+	    at.Copy(at2);
+	    if((at.getName()==at2.getName())||(at.getType()==at2.getType()) || (at.getValue()==at2.getValue()))
+	    {
+	        ++ok;
+	        cout<<"OK"<<endl;
+	        at2.setName("inne");
+	        if(at2.getName()!=at.getName())
+	        {
+	            ++ok;
+	            cout<<"sa to 2 niezalezne obiekty"<<endl;
+	        }
+	        else
+	        {
+	            ++fail;
+	            cout<<"obiekty zaleza od siebie"<<endl;
+	        }
+	    }
+	    else
+	    {
+	        ++fail;
+	        cout<<"FAIL"<<endl;
+	    }
+	    cout<<"Konstruktor kopiujacy ->";
+	    Atribute at3(at);
 
-    cout<<endl<<"Przeprowadzono "<<fail+ok<<" testów, gdzie:"<<endl<<"-> Poprawnych: "<<ok<<endl<<"-> Niepoprawnych: "<<fail<<endl;
+	     if(at.getName()==at3.getName()&&at.getType()==at3.getType()&&at.getValue()==at3.getValue())
+	    {
+	        ++ok;
+	        cout<<"OK"<<endl;
+	        at3.setName("sys");
+	        if(at3.getName()!=at.getName())
+	        {
+	            ++ok;
+	            cout<<"sa to 2 niezalezne obiekty"<<endl;
+	        }
+	        else
+	        {
+	            ++fail;
+	            cout<<"obiekty zaleza od siebie"<<endl;
+	        }
+	    }
+	    else
+	    {
+	        ++fail;
+	        cout<<"FAIL"<<endl;
+	    }
+	    cout<<"\n\n Przeprowadzono "<<fail+ok<<"testow:"<<"\n gdzie pomyślnie klasa przeszła: "<<ok<<"\n a niepomyślnie: "<<fail<<endl;
 	    return 0;
 	}
 

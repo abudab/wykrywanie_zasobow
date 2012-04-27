@@ -1,13 +1,13 @@
 #include "Response.h"
 #include "Monitor.h"
 #include <sstream>
+#include <iostream>
+
 
 using namespace std;
 /// Konstruktor domyślny nadaje _id=0
 Response::Response():_id(0)
 {
-    vector<Monitor*> aa;
-    _mon=aa;
 }
 /// Konstruktor zależny od 2 parametrów
 /// \param id wartość int przypisywana do _id
@@ -18,11 +18,11 @@ Response::Response(int id,vector <Monitor*> mon):_id(id), _mon(mon)
 /// Destruktor
 Response::~Response()
 {
-    int siz=_mon.size();
+  /*  int siz=_mon.size();
     for(int i=0; i<siz; ++i)
     {
         delete _mon[i];
-    }
+    }*/
     _mon.clear();
 }
 /// Funkcja zwracająca wartość _id odpowiedzi w postaci int
@@ -52,9 +52,10 @@ vector<Monitor*>& Response::getMonitor()
 /// \param new_m wskaźnik do Monitora, który zostanie dodany
 void Response::addMonitor(Monitor* new_m)
 {
-    Monitor* mon_n=new Monitor();
-    mon_n->Copy(new_m);
-    _mon.push_back(mon_n);
+
+    Monitor* m=new Monitor(*new_m);
+    _mon.push_back(m);
+
 }
 /// Funkcja ustalająca nowy zbiór monitorów. Bezpowrotnie kasuje poprzedni zbiór monitorów
 /// \param mon zbiór monitorów spełniających zapytanie
@@ -69,8 +70,7 @@ void Response::setMonitors(vector <Monitor*> mon)
     siz=mon.size();
     for(int i=0; i<siz; ++i)
     {
-        Monitor* m=new Monitor();
-        m->Copy(mon[i]);
+        Monitor* m=new Monitor(*(mon[i]));
         _mon.push_back(m);
     }
 

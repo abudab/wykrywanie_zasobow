@@ -8,21 +8,25 @@ using namespace std;
 /// Komstruktor domyślny generuje pusty wektor wskaźników do Info i _type="non"
 Compare::Compare():Info()
 {
-    vector<Info*> p;
-    _data=p;
 }
 /// Konstruktor generuje pusty wektor wskaźników do Info i _type ma nadawaną nazwę
 /// \param type string reprezentujący nazwę, która zostanie przypisna jako typ porównania
 Compare::Compare(string type):Info(type)
 {
-    vector<Info*> p;
-    _data=p;
 }
 /// Konstruktoe zależy od parametrów string i vector<Info*>
 /// \param type nadawany typ porównania
 /// \param data dane w postaci vector<Info*> przechowywane w Compare
 Compare::Compare(string type, vector<Info*> data):Info(type), _data(data)
 {
+}
+///Konstruktor kopiujacy
+Compare::Compare(Compare& org)
+{
+    _type=org.getType();
+    int r=org.getInfo().size();
+    for(int i=0;i<r;++i)
+        _data.push_back(org.getInfo()[i]);
 }
 /// Destruktor zwalniający pamięć
 Compare::~Compare()
