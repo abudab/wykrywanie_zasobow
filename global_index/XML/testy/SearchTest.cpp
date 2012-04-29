@@ -13,7 +13,7 @@
 	{
 	    int ok=0;
 	    int fail=0;
-	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPUfrequency' compType='>=' value='1.0GHz' /><Atrybute name='CPUfrequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEMCount' compType='>=' value='4GB' /></Compare></Data></Search>");
+	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPU-frequency' compType='>=' value='1.0GHz' /><Atrybute name='CPU-frequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEM-Count' compType='>=' value='4GB' /></Compare></Data></Search>");
 	    cout<<"Konstruktor domyslny -> ";
 	    Search sz;
 	    if(sz.getName()!="")
@@ -143,7 +143,7 @@
 	    //setFilters
         vector<string*> fil_v;
         siz=szuka.getFilters().size();
-        cout<<"ustawienie niwych filtrów -> ";
+        cout<<"ustawienie nowych filtrów -> ";
         szuka.setFilters(fil_v);
         if(siz!=szuka.getFilters().size())
         {
@@ -159,9 +159,11 @@
 	    }
 	    cout<<"Konstruktor zależny od striga zawierającego XMLa -> ";
 	    Search szuka2(xml);
+	    //szuka2.loadS(xml);
 	    if(szuka2.getName()!=""&&szuka2.getIdI()>0)
 	    {
 	        ++ok;
+	        cout<<"OK";
 	        cout<<endl<<"  --> utworzony obiekt o nazwie:"<<szuka2.getName()<<" i id: "<<szuka2.getId()<<endl;
             cout<<"  --> z filtrami:"<<endl;
             vector<string*> vs=szuka2.getFilters();
@@ -178,37 +180,60 @@
             r=vc2.size();
             for(int i=0;i<r;++i)
             {
-                cout<<"           type: "<<vc2[i]->getType()<<" ,"<<vc2[i]->getInfo().size()<<":"<<endl;
-                vector<Info*> info1=vc2[i]->getInfo();
-               for(int j=0;j<vc2[i]->getInfo().size();++j)
+                int rr=vc2[i]->getInfo().size();
+                cout<<"\t type: "<<vc2[i]->getType()<<" , rozmiar: "<<rr<<endl;
+                 for(int j=0;j<rr;++j)
                 {
-                  cout<<info1[j]->getType()<<endl;
-                  if(j==0)
-                  {
-                    Compare* ccc=(Compare*)(vc2[i]->getInfo()[0]);
-                    ccc->getInfo();
-                    cout<<" ma:"<<ccc->getInfo().size()<<" elementy:"<<endl;
-                    int pp=ccc->getInfo().size();
-                    for(int ii=0;ii<pp;++ii)
+                    Compare* cc=new Compare();
+                    Atribute* ati=new Atribute();
+                    if(dynamic_cast<Compare*>(vc2[i]->getInfo()[j]))
                     {
-                        cout<<"         -> "<<ccc->getInfo()[ii]->getType() <<endl;
+                        cc=(dynamic_cast<Compare*>(vc2[i]->getInfo()[j]))->Copy();
+                        int r2=cc->getInfo().size();
+                        cout<<"\t\t Porownanie: "<<cc->getType()<<" , rozmiar: "<<r2<<endl;
+                       for(int k=0;k<r2;++k)
+                        {
+                            Compare* cc1=new Compare();
+                            Atribute* at1=new Atribute();
+                            if(dynamic_cast<Compare*>(cc->getInfo()[k]))
+                            {
+                                cc1=(dynamic_cast<Compare*>(cc->getInfo()[k]))->Copy();
+                                cout<<"\t\t\t Porownanie: "<<cc1->getType()<<" , rozmiar: "<<cc1->getInfo().size()<<endl;
+                                delete cc1;
+                            }
+                            else
+                            {
+                                if(dynamic_cast<Atribute*>(cc->getInfo()[k]))
+                                {
+                                    at1=(dynamic_cast<Atribute*>(cc->getInfo()[k]))->Copy();
+                                    cout<<"\t\t\t Atrybut: "<<at1->getName()<<" , "<<at1->getType()<<" , "<<at1->getValue()<<endl;
+                                    delete at1;
+                                }
+                                else
+                                {
+                                    cout<<"FAIL"<<endl;
+                                }
+                            }
 
-                    Atribute* aabb=(Atribute*)(ccc->getInfo()[ii]);
-                    cout<<"NIE MOGE ZRZUTOWAC NA ATRIBUTE"<<endl;
-                     // cout<<aabb->getName()<<" value:"<<aabb->getValue();
+
+                        }
+                        delete cc;
+
                     }
-
-                  }
-                  else
-                  {
-                      Atribute* aaaa=(Atribute*)(vc2[i]->getInfo()[1]);
-                      cout<<aaaa->getName()<<" value:"<<aaaa->getValue();
-                  }
-
+                    else
+                    {
+                        if(dynamic_cast<Atribute*>(vc2[i]->getInfo()[j]))
+                        {
+                            ati=(dynamic_cast<Atribute*>(vc2[i]->getInfo()[j]))->Copy();
+                            cout<<"\t\t Atribut: "<<ati->getName()<<" , "<<ati->getType()<<" , "<<ati->getValue()<<endl;
+                            delete ati;
+                        }
+                        else
+                        {
+                            cout<<"FAIL";
+                        }
+                    }
                 }
-                cout<<endl;
-
-
             }
 
 	    }
@@ -218,7 +243,17 @@
 	        cout<<"NIC"<<endl;
 	    }
 
+	    cout<<"Podanie niepoprawnego ciagu "<<endl;
+        string inny("<cos></cos>");
+        Search s21(inny);
+        cout<<s21.getName()<<" , "<<s21.getId()<<" , Porownania: "<<s21.getComp().size()<<" , filtry "<<s21.getFilters().size()<<endl;
+
+        Search s33;
+        s33.loadS("");
+
+        cout<<s33.getName()<<" , "<<s33.getId()<<" , Porownania: "<<s33.getComp().size()<<" , filtry "<<s33.getFilters().size()<<endl;
 
     cout<<endl<<"Przeprowadzono "<<fail+ok<<" testów, gdzie:"<<endl<<"-> Poprawnych: "<<ok<<endl<<"-> Niepoprawnych: "<<fail<<endl;
 	    return 0;
 	}
+

@@ -20,44 +20,45 @@ Search::Search():_name("non"), _id(0)
 /// \param xml zapytanie XML w postaci string
 Search::Search(string xml)
 {
-    vector<Compare*> w;
-    _comp=w;
-    vector<string*> s;
-    _filters=s;
+
 //utworzenie obiektu dokumentu xml
      xml_document doc;
 //wczytanie struktury dokumrntu
     doc.load(xml.c_str());
     //obiekt odnoszący się do noda search
     xml_node search = doc.child("Search");
-
-    //pobranie nazwy i id dla klasy search(nazwy i id wyszukania)
-    _name=search.attribute("name").value();
-    istringstream buffer(search.attribute("id").value());
-    buffer>>_id;
-    //pobranie filtrow
-    //obiekt odnoszacy sie do noda Filters
-    xml_node filters=search.child("Filters");
-    for (xml_node filtr = filters.child("Filter"); filtr; filtr = filtr.next_sibling("Filter"))
+    if(search.empty())
     {
-        string* new_filter=new string(filtr.attribute("name").value());
-        _filters.push_back(new_filter);
+            _name="empty";
+            _id=-7;
     }
-    //pobranie Compare
-    xml_node data=search.child("Data");
-    for(xml_node com=data.child("Compare"); com; com=com.next_sibling("Compare"))
+    else
     {
-        Compare* nc=new Compare();
-       //elementy atribute
-       string type=com.attribute("type").value();
-       nc->setType(type);
-        //read atribute
+        //pobranie nazwy i id dla klasy search(nazwy i id wyszukania)
+        _name=search.attribute("name").value();
+        istringstream buffer(search.attribute("id").value());
+        buffer>>_id;
+        //pobranie filtrow
+        //obiekt odnoszacy sie do noda Filters
+        xml_node filters=search.child("Filters");
+        for (xml_node filtr = filters.child("Filter"); filtr; filtr = filtr.next_sibling("Filter"))
+        {
+            string* new_filter=new string(filtr.attribute("name").value());
+            _filters.push_back(new_filter);
+        }
+        //pobranie Compare
+        xml_node data=search.child("Data");
+        for(xml_node com=data.child("Compare"); com; com=com.next_sibling("Compare"))
+        {
+            Compare* nc=new Compare();
+           //elementy atribute
+           string type=com.attribute("type").value();
+           nc->setType(type);
+           readC(com,nc);
+           readA(com, nc);
 
-       //read Compare
-       readC(com,nc);
-       readA(com, nc);
-
-       _comp.push_back(nc);
+           _comp.push_back(nc);
+        }
     }
 }
 /// Destruktor
@@ -162,39 +163,45 @@ void Search::loadS(std::string xml)
     }
     _filters.clear();
     //zapis nowego z xml
-    xml_document doc;
+
+//utworzenie obiektu dokumentu xml
+     xml_document doc;
 //wczytanie struktury dokumrntu
     doc.load(xml.c_str());
     //obiekt odnoszący się do noda search
     xml_node search = doc.child("Search");
-
-    //pobranie nazwy i id dla klasy search(nazwy i id wyszukania)
-    _name=search.attribute("name").value();
-    istringstream buffer(search.attribute("id").value());
-    buffer>>_id;
-    //pobranie filtrow
-    //obiekt odnoszacy sie do noda Filters
-    xml_node filters=search.child("Filters");
-    for (xml_node filtr = filters.child("Filter"); filtr; filtr = filtr.next_sibling("Filter"))
+    if(search.empty())
     {
-        string* new_filter=new string(filtr.attribute("name").value());
-        _filters.push_back(new_filter);
+            _name="empty";
+            _id=-7;
     }
-    //pobranie Compare
-    xml_node data=search.child("Data");
-    for(xml_node com=data.child("Compare"); com; com=com.next_sibling("Compare"))
+    else
     {
-        Compare* nc=new Compare();
-         string type=com.attribute("type").value();
-       nc->setType(type);
-       //elementy atribute
-        //read atribute
+        //pobranie nazwy i id dla klasy search(nazwy i id wyszukania)
+        _name=search.attribute("name").value();
+        istringstream buffer(search.attribute("id").value());
+        buffer>>_id;
+        //pobranie filtrow
+        //obiekt odnoszacy sie do noda Filters
+        xml_node filters=search.child("Filters");
+        for (xml_node filtr = filters.child("Filter"); filtr; filtr = filtr.next_sibling("Filter"))
+        {
+            string* new_filter=new string(filtr.attribute("name").value());
+            _filters.push_back(new_filter);
+        }
+        //pobranie Compare
+        xml_node data=search.child("Data");
+        for(xml_node com=data.child("Compare"); com; com=com.next_sibling("Compare"))
+        {
+            Compare* nc=new Compare();
+           //elementy atribute
+           string type=com.attribute("type").value();
+           nc->setType(type);
+           readC(com,nc);
+           readA(com, nc);
 
-       //read Compare
-       readC(com,nc);
-       readA(com, nc);
-
-       _comp.push_back(nc);
+           _comp.push_back(nc);
+        }
     }
 }
 /// Funkcja pomocnicza do wczytywania elementów Compare, poniewaz nie znamy głębokości ich rekurencji
@@ -211,6 +218,9 @@ void Search::readA(xml_node node,Compare* c)
            c->addInfo(at);
        }
 }
+///Prywatna funkacja pomocnicza wczytujaca elementy Compare z xml
+///\param c obirkt do ktorego dodajemy elementy
+///\param node fragment drzewa w ktorym szukamy elementow Compare
 void Search::readC(xml_node node,Compare* c)
 {
     for(xml_node com=node.child("Compare"); com; com=com.next_sibling("Compare"))
@@ -228,14 +238,17 @@ void Search::readC(xml_node node,Compare* c)
     }
 
 }
+///funkcja zapisujaca gotowy zbior porowanań
 void Search::setCompare(vector<Compare*> comp)
 {
     int siz=_comp.size();
+
     for(int i=0; i<siz; ++i)
     {
         delete _comp[i];
 
     }
+   // cout<<"sdfs"<<endl;
     _comp.clear();
     siz=comp.size();
     for(int i=0; i<siz; ++i)
@@ -245,6 +258,7 @@ void Search::setCompare(vector<Compare*> comp)
         _comp.push_back(c);
     }
 }
+///Funkcja zapisujaca gotowy zbior filtrow
 void Search::setFilters(vector<string*> comp)
 {
     int siz=_filters.size();
