@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from xml.etree import ElementTree
+from time import time
 
 class Filter:
 	"""Abstrakcyjny filtr - klasa z metoda
@@ -20,7 +21,9 @@ class FilterByQuery (Filter):
 
 	def filter(self,query,nodeslist):
 		"""Glowna metoda filtrujaca"""
-		return self.compareOR(query,nodeslist)
+		rl=self.compareOR(query,nodeslist)
+		resultlist=[dict([(k,v[0]) for k,v in i.items()]) for i in rl ]
+		return resultlist
 		
 	def compareOR(self,query,nodeslist):
 		"""Filtruje wyrazenie OR dodajac
@@ -68,20 +71,19 @@ class FilterByQuery (Filter):
 		"""
 		#print 'spec'
 		resultlist=[]
-		#try:
-		name=query.get('name')
-		compType=query.get('compType')
-		value=query.get('value')
-		value=self.absoluteValue(name,value)
-		if compType not in self.compTypes: raise
-		for i in nodeslist:
-			if name in i:
-				ival=self.absoluteValue(name,i[name])
-				if eval(repr(ival)+compType+repr(value)):
-					resultlist.append(i)
-		#except:
-		#	print 'bum!'
-		#print resultlist
+		try:
+			name=query.get('name')
+			compType=query.get('compType')
+			value=query.get('value')
+			value=self.absoluteValue(name,value)
+			if compType not in self.compTypes: raise
+			for i in nodeslist:
+				if name in i:
+					ival=self.absoluteValue(name,i[name][0])
+					if eval(repr(ival)+compType+repr(value)):
+						resultlist.append(i)
+		except:
+			pass
 		return resultlist
 			
 	def absoluteValue(self,name,value):
@@ -104,14 +106,33 @@ class FilterByQuery (Filter):
 		return value
 		
 class FilterByTimestamp(Filter):
-	pass	
+	def filter(self,query,nodeslist):
+		resultlist=[]
+		try:
+			timestamp=int(query.get('value'))
+			for i in nodeslist:
+				d={}
+				for (k,v) in i.items():
+					if v[1]>=timestamp:
+						d[k]=v[0];
+				if d: 
+					d['name']=i['name'][0]
+					resultlist.append(d)
+		except:
+			pass
+		return resultlist
+		
 			
 			
 # test/sposob wykorzystania:
 if __name__=="__main__":
 	#przykladowa lista zasobow
 	osy=('DOS','GNU','Solaris')
-	nl=[{'name':'local_192.168.1.'+str(i),'CPU-Frequency':str(i*0.5)+'GHz','MEM-Count':str(1000*i)+'MB','OS-Name':osy[i%3]} for i in range(1,11)]
+	#lista to lista slownikow, z podwojnymi wartosciami: atrybut->(wartosc,timestamp)
+	nl=[{ 'name':          ('local_192.168.1.'+str(i) , 0),
+	      'CPU-Frequency': (str(i*0.5)+'GHz'          , int(time())-i),
+	      'MEM-Count':     (str(1000*i)+'MB'          , int(time())-i-2 ),
+	      'OS-Name':       (osy[i%3], 0 )} for i in range(1,11)]
 	#przykladowe zapytanie (prosto z wiki)
 	query="""<Search name="request_001" id="12345">
      <Filters>
@@ -136,4 +157,16 @@ if __name__=="__main__":
 	tree=ElementTree.fromstring(query)
 	query=tree.getchildren()[1]
 	print FilterByQuery().filter(query,nl)
+	
+	
+	#filtrowanie przez czas zmiany
+	query="""<Search name="update" id="0" >
+		<timestamp value="%d" />
+	</Search>""" % (int(time()-3),)
+	#print nl
+	#print query
+	
+	tree=ElementTree.fromstring(query)
+	query=tree.getchildren()[0]
+	print FilterByTimestamp().filter(query,nl)
 		
