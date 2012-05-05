@@ -1,6 +1,8 @@
 #ifndef NETCONTROLLER_H
 #define NETCONTROLLER_H
 
+#include <iostream>
+#include <cstring>
 
 class NetController
 {
@@ -10,8 +12,10 @@ class NetController
 
     public:
         bool daemonize();
-    protected:
+        void printHttpHeader(int status);
     private:
+
+        int _uid;
 };
 
 #endif // NETCONTROLLER_H
