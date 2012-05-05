@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<resource type="host" href="rd.example.com/resources/12">
+		<name>host.example.com</name>
+		<attribute name="OS" value="Linux/Ubuntu 10" />
+		<attribute name="FreeMem" value="6172MB" />
+	</resource>
+
+	<resource type="host" href="rd.example.com/resources/13">
+		<name>host2.example.com</name>
+		<attribute name="OS" value="Windows 7" />
+		<attribute name="FreeMem" value="1024MB" />
+		<attribute name="FreeSpace" value="50GB" />
+	</resource>
+</resources>
