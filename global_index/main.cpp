@@ -14,7 +14,6 @@ int main()
     //
     ////////////////////////
 
-
     ////////////////////////
     // KONCZYMY KOMUNIKACJE Z KLIENTEM PRZEZ DEMONIZACJE PROCESU
     ////////////////////////
@@ -31,7 +30,6 @@ int main()
 
     //
     ////////////////////////
-
 
 
     return 0;
