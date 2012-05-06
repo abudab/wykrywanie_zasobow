@@ -32,7 +32,33 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Linker>
+			<Add option="-lpqxx" />
+		</Linker>
+		<Unit filename="List.cpp" />
+		<Unit filename="Net/NetController.cpp" />
+		<Unit filename="Net/NetController.h" />
+		<Unit filename="XML/Atribute.cpp" />
+		<Unit filename="XML/Atribute.h" />
+		<Unit filename="XML/Compare.cpp" />
+		<Unit filename="XML/Compare.h" />
+		<Unit filename="XML/Monitor.cpp" />
+		<Unit filename="XML/Monitor.h" />
+		<Unit filename="XML/Responce.cpp" />
+		<Unit filename="XML/Response.h" />
+		<Unit filename="XML/Search.cpp" />
+		<Unit filename="XML/Search.h" />
+		<Unit filename="XML/info.cpp" />
+		<Unit filename="XML/info.h" />
+		<Unit filename="db/DatabaseStorage.cpp" />
+		<Unit filename="db/DatabaseStorage.hxx" />
+		<Unit filename="db/GlobalCache.cpp" />
+		<Unit filename="db/GlobalCache.hxx" />
+		<Unit filename="db/QueryDispatcher.cpp" />
+		<Unit filename="db/QueryDispatcher.hxx" />
+		<Unit filename="pugi/pugiconfig.hpp" />
+		<Unit filename="pugi/pugixml.cpp" />
+		<Unit filename="pugi/pugixml.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

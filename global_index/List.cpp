@@ -13,17 +13,20 @@ int main()
 
     GlobalCache db;
 
-    Response* resp = db.getResponse(atoi( core.getUID().c_str() ));
+    std::string* resp = db.getResponse( core.getUID().c_str() );
 
     if( resp )
     {
-        core.printHttpHeader(200);
+        core.beginHttpHeader(200);
 
-        std::cout << resp->toXML();
+        std::cout << resp;
+
+        delete resp;
     }
     else
-        core.printHttpHeader(202);
+        core.beginHttpHeader(202);
 
+    core.endHttpHeader();
 
     return 0;
 }

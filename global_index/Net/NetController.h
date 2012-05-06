@@ -11,11 +11,21 @@ class NetController
 
 
     public:
+        bool initialize();
         bool daemonize();
-        void printHttpHeader(int status);
+        void beginHttpHeader(int status);
+        void sendURI(std::string = "");
+        void endHttpHeader(){ std::cout << "Content-type: text/html\n\n";}
+        std::string postContentRead();
+        void getContentRead();
+        std::string idGenerate();
+        std::string addrGenerate(std::string id);
+
+
+        std::string getUID(void) { return _uid; }
     private:
 
-        int _uid;
+        std::string _uid;
 };
 
 #endif // NETCONTROLLER_H

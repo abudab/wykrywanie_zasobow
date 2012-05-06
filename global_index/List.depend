@@ -71,18 +71,18 @@
 	<new>
 	<stdint.h>
 
-1336319123 source:/home/agent/wykrywanie_zasobow/global_index/List.cpp
+1336343377 source:/home/agent/wykrywanie_zasobow/global_index/List.cpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 	"Net/NetController.h"
 	"db/GlobalCache.hxx"
 
-1336316771 /home/agent/wykrywanie_zasobow/global_index/Net/NetController.h
+1336343359 /home/agent/wykrywanie_zasobow/global_index/Net/NetController.h
 	<iostream>
 	<cstring>
 
-1336316748 source:/home/agent/wykrywanie_zasobow/global_index/Net/NetController.cpp
+1336342496 source:/home/agent/wykrywanie_zasobow/global_index/Net/NetController.cpp
 	"NetController.h"
 	<sys/types.h>
 	<sys/stat.h>
@@ -107,8 +107,10 @@
 	<vector>
 	"Monitor.h"
 
-1336318939 /home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.hxx
+1336342561 /home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.hxx
 	<cstdio>
+	<typeinfo>
+	<boost/regex.hpp>
 	"QueryDispatcher.hxx"
 	"DatabaseStorage.hxx"
 	"../XML/Search.h"
@@ -119,18 +121,27 @@
 	<string>
 	<iostream>
 
-1336319397 /home/agent/wykrywanie_zasobow/global_index/db/DatabaseStorage.hxx
+1336342561 /home/agent/wykrywanie_zasobow/global_index/db/DatabaseStorage.hxx
 	<cstdio>
 	<iostream>
 	<pqxx/pqxx>
 	<string>
+	"../XML/Response.h"
+	"../XML/Monitor.h"
+	"../XML/Atribute.h"
 
-1336318939 source:/home/agent/wykrywanie_zasobow/global_index/db/DatabaseStorage.cpp
+1336342561 source:/home/agent/wykrywanie_zasobow/global_index/db/DatabaseStorage.cpp
 	"DatabaseStorage.hxx"
 
-1336318939 source:/home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.cpp
+1336342561 source:/home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.cpp
 	"GlobalCache.hxx"
 
-1336318939 source:/home/agent/wykrywanie_zasobow/global_index/db/QueryDispatcher.cpp
+1336342561 source:/home/agent/wykrywanie_zasobow/global_index/db/QueryDispatcher.cpp
 	"QueryDispatcher.hxx"
+
+1336318939 source:/home/agent/wykrywanie_zasobow/global_index/XML/Response.cpp
+	"Response.h"
+	"Monitor.h"
+	<sstream>
+	<iostream>
 
