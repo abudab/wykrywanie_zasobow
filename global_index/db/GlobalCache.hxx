@@ -20,8 +20,8 @@
 #include <cstdio>
 #include "QueryDispatcher.hxx"
 #include "DatabaseStorage.hxx"
-#include "XML/Search.h"
-#include "XML/Response.h"
+#include "../XML/Search.h"
+#include "../XML/Response.h"
 
 class GlobalCache
 {
