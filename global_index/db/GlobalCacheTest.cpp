@@ -30,16 +30,15 @@ int main(){
 
   string str("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' />"
 	     "<Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'>"
-	     "<Compare type='AND'><Atrybute name='CPU-frequency' compType='>=' value='1.0GHz' />"
-	     "<Atrybute name='CPU-frequency' compType='<=' value='2.0GHz' /></Compare>"
-	     "<Atrybute name='MEM-Count' compType='>=' value='4GB' /></Compare></Data></Search>");
+	     "<Compare type='AND'><Atrybute name='CPU-Frequency' compType='>=' value='1000' />"
+	     "<Atrybute name='CPU-Frequency' compType='<=' value='1500' /></Compare>"
+	     "<Atrybute name='MEM-Count' compType='>=' value='4000' /></Compare></Data></Search>");
   
   Search srch( str );
 
-  gc.setRequest( &srch, 666 );
-  gc.getResponse( 666 );
-  gc.getResponse( 666 );
-  gc.getResponse( 666 );
+  gc.setRequest( &srch, "666" );
+  cout << "Getting for the first time ..." << endl;
+  cout << gc.getResponse( "666" )->c_str() << endl;
 
   return 0;
 }

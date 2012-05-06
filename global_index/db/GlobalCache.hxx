@@ -18,6 +18,8 @@
 
 
 #include <cstdio>
+#include <typeinfo>
+#include <boost/regex.hpp>
 #include "QueryDispatcher.hxx"
 #include "DatabaseStorage.hxx"
 #include "../XML/Search.h"
@@ -28,14 +30,16 @@ class GlobalCache
  public:
    GlobalCache();
   ~GlobalCache();
-  void setRequest( Search* s, unsigned int id );
-  Response* getResponse( unsigned int id );
+  void setRequest( Search* s, std::string id );
+  std::string* getResponse( std::string id );
  private:
   QueryDispatcher *qd;
   DatabaseStorage *db;
   Response *resp;
 
   void walkTree( Info *i, std::vector <std::string> *sv );
+  std::string validate( std::string text, const char* regex );
+  std::string quote( std::string text );
 };
 
 #endif // _GLOBALCACHE_H_
