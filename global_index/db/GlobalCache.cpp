@@ -89,5 +89,7 @@ Response* GlobalCache::getResponse( unsigned int id )
 void GlobalCache::walkTree( Info *i, vector <string> *sv )
 {
   string type = i->getType();
+
+  cout << "TYPE: " << type << endl;
 }
 
