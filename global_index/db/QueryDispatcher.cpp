@@ -25,7 +25,7 @@ using std::string;
 
 QueryDispatcher::QueryDispatcher()
 {
-  cout << "Creating QueryDispatcher" << endl;
+  //cout << "Creating QueryDispatcher" << endl;
 }
 
 ////////////////
@@ -34,7 +34,7 @@ QueryDispatcher::QueryDispatcher()
 
 QueryDispatcher::~QueryDispatcher()
 {
-  cout << "Deleting QueryDispatcher" << endl;  
+  //cout << "Deleting QueryDispatcher" << endl;  
 }
 
 
@@ -44,6 +44,6 @@ QueryDispatcher::~QueryDispatcher()
 
 const char* QueryDispatcher::dispatch( const char* query) const
 {
-  cout << "Dispatching" << endl;  
+  //cout << "Dispatching" << endl;  
   return "SELECT * FROM static_resources WHERE os='Linux' AND country='PL'";
 }

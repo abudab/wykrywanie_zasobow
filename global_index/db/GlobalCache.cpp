@@ -27,7 +27,7 @@ using std::stringstream;
 
 GlobalCache::GlobalCache()
 {
-  cout << "Creating GlobalCache" << endl;
+  //cout << "Creating GlobalCache" << endl;
   qd = new QueryDispatcher();
   db = new DatabaseStorage( "localhost", "przespolowe", "a9M9PtDzgst5RFD", "5532" );
 }
@@ -38,7 +38,7 @@ GlobalCache::GlobalCache()
 
 GlobalCache::~GlobalCache()
 {
-  cout << "Deleting GlobalCache" << endl;
+  //cout << "Deleting GlobalCache" << endl;
   delete(qd);
   delete(db);
 }
@@ -50,7 +50,7 @@ GlobalCache::~GlobalCache()
 
 void GlobalCache::setRequest( Search* srch, string id )
 {
-  cout << "Setting Request ..." << endl;
+  //cout << "Setting Request ..." << endl;
   vector <string> sql_query = vector<string>();
  
   vector <Filter*> filters = srch->getFilters();
@@ -94,7 +94,7 @@ void GlobalCache::setRequest( Search* srch, string id )
 
 string* GlobalCache::getResponse( string id )
 {
-  cout << "Getting response #" << id << " ..." << endl;
+  //cout << "Getting response #" << id << " ..." << endl;
 
   return db->getResponse( id );
 }

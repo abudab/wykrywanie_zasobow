@@ -38,7 +38,11 @@ int main(){
 
   gc.setRequest( &srch, "666" );
   cout << "Getting for the first time ..." << endl;
-  cout << gc.getResponse( "666" )->c_str() << endl;
+	  
+  string *response = gc.getResponse( "666" );
+  if( response != NULL ){
+      cout << response->c_str() << endl;
+  }
 
   return 0;
 }

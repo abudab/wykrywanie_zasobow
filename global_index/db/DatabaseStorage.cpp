@@ -26,7 +26,7 @@ using std::stringstream;
 
 DatabaseStorage::DatabaseStorage(const char* host, const char* user, const char* pass, const char* port )
 {
-  cout << "Creating DatabaseStorage" << endl;
+  //cout << "Creating DatabaseStorage" << endl;
 
   string cred = "";
   cred += "host=";
@@ -48,7 +48,7 @@ DatabaseStorage::DatabaseStorage(const char* host, const char* user, const char*
 
 DatabaseStorage::~DatabaseStorage()
 {
-  cout << "Deleting DatabaseStorage" << endl;
+  //cout << "Deleting DatabaseStorage" << endl;
 
   delete(con);
 }
@@ -61,7 +61,7 @@ DatabaseStorage::~DatabaseStorage()
 void DatabaseStorage::getData( const char* sql_query, string id )
 {
 
-  cout << "DATABASE: " << sql_query << endl;
+  //cout << "DATABASE: " << sql_query << endl;
 
   pqxx::work txn(*con);
   pqxx::result res = txn.exec( sql_query );
@@ -95,10 +95,10 @@ void DatabaseStorage::getData( const char* sql_query, string id )
 
 void DatabaseStorage::storeResponse( std::string xml, string id )
 {
-  cout << "Storing response for #" << id << endl;
+  //cout << "Storing response for #" << id << endl;
   stringstream query( stringstream::in | stringstream::out );
   query << "INSERT INTO responses VALUES(" << id << ", $$" << xml << "$$);";
-  cout << query.str() << endl;
+  //cout << query.str() << endl;
 
   pqxx::work txn(*con);
   txn.exec( query.str() );
