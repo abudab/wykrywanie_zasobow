@@ -28,12 +28,14 @@ class GlobalCache
  public:
    GlobalCache();
   ~GlobalCache();
-  void setRequest( const Search* s, unsigned int id );
+  void setRequest( Search* s, unsigned int id );
   Response* getResponse( unsigned int id );
  private:
   QueryDispatcher *qd;
   DatabaseStorage *db;
   Response *resp;
+
+  void walkTree( Info *i, std::vector <std::string> *sv );
 };
 
 #endif // _GLOBALCACHE_H_

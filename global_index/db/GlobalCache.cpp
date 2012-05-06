@@ -17,6 +17,8 @@
 
 using std::cout;
 using std::endl;
+using std::string;
+using std::vector;
 
 /////////////////
 // CONSTRUCTOR //
@@ -45,12 +47,26 @@ GlobalCache::~GlobalCache()
 // setRequest //
 ////////////////#######################################
 
-void GlobalCache::setRequest( const Search* s, unsigned int id )
+void GlobalCache::setRequest( Search* srch, unsigned int id )
 {
   cout << "Setting Request ..." << endl;
+  const char* sql_query;
+ 
+  vector <Filter*> filters = srch->getFilters();
+  vector <Filter*>::iterator f;
 
-  const char* sql_query = qd->dispatch("");
-  db->getData(sql_query);
+  vector <Compare*> compares = srch->getComp();
+  Compare *c = compares.at(0);
+  vector <string> *compare_items = new vector <string>();
+
+  /* *** */
+
+  for( f=filters.begin(); f!=filters.end(); ++f) 
+    cout << **f << endl;
+    
+  walkTree( c, compare_items );
+
+  //db->getData(sql_query);
 }
 
 
@@ -64,3 +80,14 @@ Response* GlobalCache::getResponse( unsigned int id )
 
   return NULL;
 }
+
+
+//////////////
+// walkTree //
+//////////////#######################################
+
+void GlobalCache::walkTree( Info *i, vector <string> *sv )
+{
+  string type = i->getType();
+}
+
