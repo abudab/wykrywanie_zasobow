@@ -1,19 +1,33 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-class Node:
+class Node(dict):
 	"""Pojedyńczy zasób, czyli zbiór informacji otrzymanych z jednego monitora.
 	Na razie wykorzystuje zwykły słownik,
 	"""
-	node={}
+	#def __init__ (self):
+	#	self.Node = {}
 	def setParam(self,param,value):
-		self.node[param]=value
+		self[param]=value
 	def deleteParam(self,param):
-		del self.node[param]
+		del self[param]
 	def getValue(self,param):
-		return self.node[param]
+		return self[param]
 	def getParams(self):
-		return self.node.keys()
+		return self.keys()
+	def isDiffirent(self, other):
+		coZmienic=[]
+		myKeys = self.keys()
+		for i in myKeys:
+			if other.has_key(i):
+				if self[i][0]!=other[i][0]:
+					coZmienic.append(i)
+			else:
+				coZmienic.append(i)
+		if len(coZmienic)>0:
+			return (True, coZmienic)
+		else:
+			return (False,[])	
 
 if __name__=="__main__":
 	a=Node()
