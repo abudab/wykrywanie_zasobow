@@ -28,12 +28,17 @@ int main(){
   
   GlobalCache gc = GlobalCache();
 
+  /*
   string str("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' />"
 	     "<Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'>"
 	     "<Compare type='AND'><Atrybute name='CPU-Frequency' compType='>=' value='1000' />"
 	     "<Atrybute name='CPU-Frequency' compType='<=' value='1500' /></Compare>"
 	     "<Atrybute name='MEM-Count' compType='>=' value='4000' /></Compare></Data></Search>");
-  
+  */
+
+  string str("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' />"
+	     "<Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters></Data></Search>");
+
   Search srch( str );
 
   gc.setRequest( &srch, "666" );

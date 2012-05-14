@@ -56,13 +56,13 @@ void GlobalCache::setRequest( Search* srch, string id )
   vector <Filter*> filters = srch->getFilters();
   vector <Filter*>::iterator f;
 
-  vector <Compare*> compares = srch->getComp();
-  Compare *c = compares.at(0);
   vector <string> *compare_items = new vector <string>();
+  vector <Compare*> compares = srch->getComp();
+  if( ! compares.empty() ) {
+    Compare *c = compares.at(0);
 
-  /* *** */
-    
-  walkTree( c, compare_items );
+    walkTree( c, compare_items );
+  }
 
   sql_query.push_back( "SELECT " );
   
@@ -73,10 +73,13 @@ void GlobalCache::setRequest( Search* srch, string id )
 
   sql_query.pop_back();
 
-  sql_query.push_back( " FROM static_resources WHERE " );
+  sql_query.push_back( " FROM static_resources " );
 
-  for( vector<string>::iterator it=compare_items->begin(); it!=compare_items->end(); ++it)
-    sql_query.push_back( *it + " " );
+  if( ! compare_items->empty() ){
+    sql_query.push_back(" WHERE ");
+    for( vector<string>::iterator it=compare_items->begin(); it!=compare_items->end(); ++it)
+      sql_query.push_back( *it + " " );
+  }
   sql_query.push_back(";");
 
   stringstream ss;
