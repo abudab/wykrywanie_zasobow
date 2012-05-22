@@ -16,17 +16,18 @@ int main()
     std::string* resp = db.getResponse( core.getUID().c_str() );
 
     if( resp )
-    {
         core.beginHttpHeader(200);
-
-        std::cout << resp;
-
-        delete resp;
-    }
     else
         core.beginHttpHeader(202);
 
     core.endHttpHeader();
+
+    if( resp )
+    {
+        std::cout << *resp; 
+
+        delete resp;
+    }
 
     return 0;
 }

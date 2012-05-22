@@ -103,7 +103,8 @@ std::string NetController::idGenerate()
     stm << curtime.tv_sec << curtime.tv_usec ;
     //stm.c_str();
     //std::cout<<curtime<<std::endl;
-    return stm.str();
+    _uid =stm.str();	
+    return _uid;
 }
 
 std::string NetController::addrGenerate(std::string id)
