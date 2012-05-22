@@ -23,11 +23,7 @@ int main()
     core.endHttpHeader();
 
     if( resp )
-    {
-        std::cout << *resp; 
-
         delete resp;
-    }
 
     return 0;
 }
