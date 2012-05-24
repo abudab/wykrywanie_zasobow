@@ -13,7 +13,7 @@
 	{
 	    int ok=0;
 	    int fail=0;
-	    string xml("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPU-frequency' compType='>=' value='1.0GHz' /><Atrybute name='CPU-frequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEM-Count' compType='>=' value='4GB' /></Compare></Data></Search>");
+	    string xml("<?xml version='1.0' ?> <Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' /><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'><Compare type='AND'><Atrybute name='CPU-frequency' compType='>=' value='1.0GHz' /><Atrybute name='CPU-frequency' compType='<=' value='2.0GHz' /></Compare><Atrybute name='MEM-Count' compType='>=' value='4GB' /></Compare></Data></Search>");
 	    cout<<"Konstruktor domyslny -> ";
 	    Search sz;
 	    if(sz.getName()!="")
