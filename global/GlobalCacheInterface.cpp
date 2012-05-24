@@ -13,14 +13,22 @@
 
 */
 
-#include <cstdio>
-#include <iostream>
+#include "Annealing.h"
 
-#include "GlobalCache.hxx"
+/////////////////
+// CONSTRUCTOR //
+/////////////////#######################################
 
-int main(){
-  
-  GlobalCache gc = GlobalCache();
-  gc.getResponse( 666 );
-  return 0;
+Annealing::Annealing()
+{
+
+}
+
+////////////////
+// DESTRUCTOR //
+////////////////#######################################
+
+Annealing::~Annealing()
+{
+
 }

@@ -41,26 +41,14 @@ GlobalCache::~GlobalCache()
 }
 
 
-////////////////
-// setRequest //
-////////////////#######################################
+/////////////
+// getData //
+/////////////#######################################
 
-void GlobalCache::setRequest( const Search* s, unsigned int id )
+void GlobalCache::getData(void)
 {
-  cout << "Setting Request ..." << endl;
+  cout << "Getting data ..." << endl;
 
   const char* sql_query = qd->dispatch("");
   db->getData(sql_query);
-}
-
-
-/////////////////
-// getResponse //
-/////////////////#######################################
-
-Response* GlobalCache::getResponse( unsigned int id )
-{
-  cout << "Getting response ..." << endl;
-
-  return NULL;
 }

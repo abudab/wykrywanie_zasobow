@@ -5,6 +5,7 @@ Wymagania:
 
      * Baza danych PostgreSQL (PostgreSQL 9.1)
      * Biblioteka do obslugi PostgreSQL w C++ (pqxx)
+     * Boost - regex (libboost-regex)
 
 Opis Dzialania:
 
