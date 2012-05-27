@@ -50,7 +50,12 @@ bool NetController::daemonize()
 
 void NetController::beginHttpHeader(int status)
 {
-    std::cout << "Status: HTTP/1.1 " << status << "\n";
+    std::cout << "Status: " << status;
+
+    if( status == 200 )
+        std::cout << " OK\n";
+    else if( status == 202 )
+        std::cout << " Accepted\n";
 
 
 }
@@ -60,7 +65,7 @@ void NetController::sendURI(std::string uri)
 
     if(uri != "")
         std::cout << "Location: " << uri  << std::endl;
-    std::cout << "Content-type: text/html\n\n";
+    std::cout << "Content-Type: text/xml\n\n";
     std::cout << uri << std::endl;
 }
 
@@ -88,10 +93,13 @@ void NetController::getContentRead()
     char *value = getenv( "QUERY_STRING" );
 
 
-    char tmp[1000]={0};
-    sscanf(value,"id=%s", tmp);
-    _uid = tmp;
+    char *tmp =NULL;
+    sscanf(value,"id=%as", tmp);
 
+    if( tmp )
+        _uid = std::string(tmp);
+    else
+        _uid = "";
 }
 
 std::string NetController::idGenerate()
@@ -103,7 +111,7 @@ std::string NetController::idGenerate()
     stm << curtime.tv_sec << curtime.tv_usec ;
     //stm.c_str();
     //std::cout<<curtime<<std::endl;
-    _uid =stm.str();	
+    _uid =stm.str();
     return _uid;
 }
 

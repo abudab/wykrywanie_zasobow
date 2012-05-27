@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <exception>
+
 #include "Net/NetController.h"
 #include "XML/Search.h"
 #include "db/GlobalCache.hxx"
@@ -23,12 +25,9 @@ int main(int argc, const char* argv[])
     core.beginHttpHeader(202);
 
     std::string id, content;
-        id = core.idGenerate();
 
-
-
-        //std::cout << core.addrGenerate(id)<<std::endl;
-        core.sendURI(core.addrGenerate(id));
+    id = core.idGenerate();
+    core.sendURI(core.addrGenerate(id));
 
     std::string str("POST");
     if(!str.compare(getenv("REQUEST_METHOD")))
@@ -46,9 +45,6 @@ int main(int argc, const char* argv[])
     //
     if( !core.daemonize() )
         std::cout << "demonizacja sie nie udala\n";
-
-
-
     //
     ////////////////////////
 
@@ -61,18 +57,17 @@ int main(int argc, const char* argv[])
       {
         Search s( content );
 
-	/*
-	std::string str("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' />"
-	     "<Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Compare type='OR'>"
-	     "<Compare type='AND'><Atrybute name='CPU-Frequency' compType='>=' value='1000' />"
-	     "<Atrybute name='CPU-Frequency' compType='<=' value='1500' /></Compare>"
-	     "<Atrybute name='MEM-Count' compType='>=' value='4000' /></Compare></Data></Search>");
-  
-	Search s( str );
-	*/
+        try
+        {
+            GlobalCache db = GlobalCache();
+            db.setRequest(&s, core.getUID());
+        }
+        catch ( std::exception& e)
+        {
+            std::cout << "\n...\n" << e.what() << "\n...\n" << std::endl;
 
-	GlobalCache db = GlobalCache();
-        db.setRequest(&s, core.getUID());
+        }
+
       }
     //
     ////////////////////////

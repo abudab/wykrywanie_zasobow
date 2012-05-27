@@ -8,7 +8,7 @@
 int main()
 {
     NetController core;
-    std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
+    //std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
     core.getContentRead();
 
     GlobalCache db;
@@ -23,7 +23,12 @@ int main()
     core.endHttpHeader();
 
     if( resp )
+    {
+        std::cout << *resp;
+
         delete resp;
+    }
+
 
     return 0;
 }
