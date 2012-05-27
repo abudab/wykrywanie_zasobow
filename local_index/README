@@ -1,6 +1,10 @@
-prosta prezentacja funkcjonalności:
-Monitor->Lokalny Indeks<-filtruj_listę
+Wymaga python 2.6/2.7 oraz
+biblioteka web.py do pobrania z webpy.org lub preferowaną drogą dla posiadanego systemu operacyjnego.
+Bibliotekę zainstalować lub rozpakować w osiągalne przez 'import'y miejsce.
 
-uruchomić jeden lub oba skrypty z folderu pseudo-monitory_do_testowania
-Uruchomić localindex.py
+prosta prezentacja funkcjonalności:
+
+1.uruchomić jeden lub oba skrypty z folderu pseudo-monitory_do_testowania (MONITOR)
+2.Uruchomić localindex.py		(INDEX LOKALNY)
+3.uruchomić któryś ze skryptów z folderu debug (INDEX GLOBALNY)
 

@@ -2,6 +2,8 @@
 
 from xml.etree import ElementTree
 from time import time
+from NodesListWrapper import NodesListWrapper as NodesList
+from Node import Node
 
 class Filter:
 	"""Abstrakcyjny filtr - klasa z metoda
@@ -129,10 +131,12 @@ if __name__=="__main__":
 	#przykladowa lista zasobow
 	osy=('DOS','GNU','Solaris')
 	#lista to lista slownikow, z podwojnymi wartosciami: atrybut->(wartosc,timestamp)
-	nl=[{ 'name':          ('local_192.168.1.'+str(i) , 0),
+	nl=NodesList() 
+	for i in range(1,11):
+		nl.add(Node({ 'name':          ('local_192.168.1.'+str(i) , 0),
 	      'CPU-Frequency': (str(i*0.5)+'GHz'          , int(time())-i),
 	      'MEM-Count':     (str(1000*i)+'MB'          , int(time())-i-2 ),
-	      'OS-Name':       (osy[i%3], 0 )} for i in range(1,11)]
+	      'OS-Name':       (osy[i%3], 0 )}))
 	#przykladowe zapytanie (prosto z wiki)
 	query="""<Search name="request_001" id="12345">
      <Filters>
@@ -156,7 +160,7 @@ if __name__=="__main__":
 	#wybieram z zapytania tylko galaz Data
 	tree=ElementTree.fromstring(query)
 	query=tree.getchildren()[1]
-	print FilterByQuery().filter(query,nl)
+	print FilterByQuery().filter(query,nl.poProstuDajListe())
 	
 	
 	#filtrowanie przez czas zmiany
@@ -168,5 +172,5 @@ if __name__=="__main__":
 	
 	tree=ElementTree.fromstring(query)
 	query=tree.getchildren()[0]
-	print FilterByTimestamp().filter(query,nl)
+	print FilterByTimestamp().filter(query,nl.poProstuDajListe())
 		
