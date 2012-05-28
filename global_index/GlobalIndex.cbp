@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/GlobalIndex" prefix_auto="1" extension_auto="1" />
+				<Option output="../../public_html/cgi-bin/GlobalIndex" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -43,6 +43,7 @@
 		<Unit filename="XML/Compare.h" />
 		<Unit filename="XML/Monitor.cpp" />
 		<Unit filename="XML/Monitor.h" />
+		<Unit filename="XML/Response.cpp" />
 		<Unit filename="XML/Response.h" />
 		<Unit filename="XML/Search.cpp" />
 		<Unit filename="XML/Search.h" />

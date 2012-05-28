@@ -52,7 +52,7 @@ void GlobalCache::setRequest( Search* srch, string id )
 {
   //cout << "Setting Request ..." << endl;
   vector <string> sql_query = vector<string>();
- 
+
   vector <Filter*> filters = srch->getFilters();
   vector <Filter*>::iterator f;
 
@@ -65,8 +65,8 @@ void GlobalCache::setRequest( Search* srch, string id )
   }
 
   sql_query.push_back( "SELECT " );
-  
-  for( f=filters.begin(); f!=filters.end(); ++f) { 
+
+  for( f=filters.begin(); f!=filters.end(); ++f) {
     sql_query.push_back( quote(**f) );
     sql_query.push_back( ", " );
   }
@@ -82,11 +82,17 @@ void GlobalCache::setRequest( Search* srch, string id )
   }
   sql_query.push_back(";");
 
+
+  std::string* pstmp = db->getResponse( id );
+
+  if( pstmp )
+    delete pstmp;
+
   stringstream ss;
 
   for( vector<string>::iterator it=sql_query.begin(); it!=sql_query.end(); ++it)
     ss << *it ;
-  
+
   db->getData(ss.str().c_str(), id);
 }
 
@@ -134,10 +140,10 @@ void GlobalCache::walkTree( Info *i, vector <string> *sv )
 // validate //
 //////////////#######################################
 
-std::string GlobalCache::validate( std::string text, const char* regex ) 
+std::string GlobalCache::validate( std::string text, const char* regex )
 {
   //  FIXME: Importnant - proper input validation!!!
-  //  boost::regex re( regex.c_str() ); 
+  //  boost::regex re( regex.c_str() );
   return text;
 }
 
@@ -146,7 +152,7 @@ std::string GlobalCache::validate( std::string text, const char* regex )
 // quote //
 ///////////#######################################
 
-std::string GlobalCache::quote( std::string text ) 
+std::string GlobalCache::quote( std::string text )
 {
   return "\"" + text + "\"";
 }

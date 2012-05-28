@@ -5,11 +5,8 @@
 #include <exception>
 
 #include "Net/NetController.h"
-#include "XML/Search.h"
+#include "XML/Registration.h"
 #include "db/GlobalCache.hxx"
-
-using std::cout;
-using std::endl;
 
 int main(int argc, const char* argv[])
 {
@@ -22,18 +19,17 @@ int main(int argc, const char* argv[])
     ////////////////////////
     //
 
-    core.beginHttpHeader(202);
+    core.beginHttpHeader(200);
+    core.endHttpHeader();
 
-    std::string id, content;
-
-    id = core.idGenerate();
-    core.sendURI(core.addrGenerate(id));
 
     std::string str("POST");
+    std::string content;
+
+
     if(!str.compare(getenv("REQUEST_METHOD")))
     {
         content = core.postContentRead();
-
     }
 
     //
@@ -55,19 +51,10 @@ int main(int argc, const char* argv[])
 
     if(! content.empty() )
       {
-        Search s( content );
+        Registration r( content );
 
-        try
-        {
-            GlobalCache db = GlobalCache();
-            db.setRequest(&s, core.getUID());
-        }
-        catch ( std::exception& e)
-        {
-            std::cout << "\n...\n" << e.what() << "\n...\n" << std::endl;
-
-        }
-
+        //TODO; Olek to powinno trafic do bazy danych, to jest adres lokalnego indeksu
+        //r.Getaddress();
       }
     //
     ////////////////////////

@@ -15,7 +15,7 @@ class NetController
         bool daemonize();
         void beginHttpHeader(int status);
         void sendURI(std::string = "");
-        void endHttpHeader(){ std::cout << "Content-type: text/html\n\n";}
+        void endHttpHeader(){ std::cout << "Content-Type: text/html\n\n";}
         std::string postContentRead();
         void getContentRead();
         std::string idGenerate();
@@ -23,7 +23,17 @@ class NetController
 
 
         std::string getUID(void) { return _uid; }
+
+
+
+
+        styd::string HttpRequest(std::string adres,std::string message);
+
+
+
     private:
+
+        std::string _request;
 
         std::string _uid;
 };
