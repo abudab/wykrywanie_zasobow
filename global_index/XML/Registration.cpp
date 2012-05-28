@@ -6,10 +6,10 @@ using namespace std;
 using namespace pugi;
 
 
-/// Konstruktor domyślny nadaje _address="non"
+/// Konstruktor domyślny nadaje _address=""
 Registration::Registration()
 {
-    _address="non";
+    _address="";
 }
 /// Konstruktor tworzący obiekt klasy z zapytania xml
 /// Nie sprawdza czy  podany w xmlu adres jest poprawny
@@ -24,7 +24,7 @@ Registration::Registration(std::string xml)
     xml_node search = doc.child("Registration");
     if(search.empty())
     {
-        _address="non";
+        _address="";
 
     }
     else
@@ -33,7 +33,7 @@ Registration::Registration(std::string xml)
 
         if(_address.empty())
         {
-           _address="non";
+           _address="";
         }
 
     }
