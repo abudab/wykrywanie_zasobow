@@ -23,7 +23,17 @@ class NetController
 
 
         std::string getUID(void) { return _uid; }
+
+
+
+
+        styd::string HttpRequest(std::string adres,std::string message);
+
+
+
     private:
+
+        std::string _request;
 
         std::string _uid;
 };

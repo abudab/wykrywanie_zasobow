@@ -11,7 +11,11 @@
 #include <unistd.h>
 #include <syslog.h>
 #include <sys/time.h>
-
+#include <curl/curl.h>
+#include <curl/easy.h>
+#include <curlpp/cURLpp.hpp>
+#include <curlpp/Easy.hpp>
+#include <curlpp/Options.hpp>
 
 NetController::NetController()
 {
@@ -93,6 +97,7 @@ void NetController::getContentRead()
     char *value = getenv( "QUERY_STRING" );
 
 
+<<<<<<< Updated upstream
     char *tmp =NULL;
     sscanf(value,"id=%as", tmp);
 
@@ -100,6 +105,11 @@ void NetController::getContentRead()
         _uid = std::string(tmp);
     else
         _uid = "";
+=======
+    char tmp[1000]={0};
+    sscanf(value,"id=%s", tmp);
+    _uid = tmp;
+>>>>>>> Stashed changes
 }
 
 std::string NetController::idGenerate()
@@ -133,3 +143,44 @@ bool NetController::initialize()
     sleep(0);
     return true;
 }
+
+std::string NetController::HttpRequest(std::string adres,std::string message)
+{
+
+    std::stringstream out;
+
+    try
+	{
+		curlpp::Cleanup cleaner;
+    curlpp::Easy request;
+
+    request.setOpt(new curlpp::options::Url(adres));
+    request.setOpt(new curlpp::options::Verbose(true));
+
+    std::list<std::string> header;
+    header.push_back("Content-Type: text/xml");
+
+    request.setOpt(new curlpp::options::HttpHeader(header));
+
+    request.setOpt(new curlpp::options::PostFields(message));
+    request.setOpt(new curlpp::options::PostFieldSize(message.length()));
+
+    request.perform();
+
+
+
+    out <<request;
+
+	}
+catch ( curlpp::LogicError & e ) {
+    //std::cout << e.what() << std::endl;
+  }
+  catch ( curlpp::RuntimeError & e ) {
+    //std::cout << e.what() << std::endl;
+  }
+
+  return out.str();
+  }
+
+
+
