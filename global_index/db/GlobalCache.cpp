@@ -25,11 +25,12 @@ using std::stringstream;
 // CONSTRUCTOR //
 /////////////////#######################################
 
-GlobalCache::GlobalCache()
+GlobalCache::GlobalCache( NetController *net )
 {
   //cout << "Creating GlobalCache" << endl;
   qd = new QueryDispatcher();
   db = new DatabaseStorage( "localhost", "przespolowe", "a9M9PtDzgst5RFD", "5532" );
+  this->net = net;
 }
 
 ////////////////
@@ -156,5 +157,58 @@ std::string GlobalCache::quote( std::string text )
 {
   return "\"" + text + "\"";
 }
+
+
+/////////////////
+// saveRequest //
+/////////////////#######################################
+
+void GlobalCache::saveRequest( std::string id, std::string data )
+{
+  db->storeRequest( data, id );
+}
+
+
+////////////////
+// getRequest //
+////////////////#######################################
+
+/**
+   RETURNS LAST SORED INDEX
+ */
+std::pair<std::string,std::string>*  GlobalCache::getRequest( void )
+{
+  return db->getRequest();
+}
+
+
+////////////////////////
+// registerLocalIndex //
+////////////////////////#######################################
+
+void GlobalCache::registerLocalIndex( std::string url )
+{
+  db->registerLocalIndex( url );
+}
+
+//////////////////////
+// deleteLocalIndex //
+//////////////////////#######################################
+
+void GlobalCache::deleteLocalIndex( std::string url )
+{
+  db->deleteLocalIndex( url );
+}
+
+////////////
+// update //
+////////////#######################################
+
+bool GlobalCache::update( void )
+{
+  // BLOCKER: get_all_local_indexes()
+}
+
+
 
 

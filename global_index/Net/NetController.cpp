@@ -96,20 +96,10 @@ void NetController::getContentRead()
 {
     char *value = getenv( "QUERY_STRING" );
 
-
-<<<<<<< Updated upstream
-    char *tmp =NULL;
-    sscanf(value,"id=%as", tmp);
-
-    if( tmp )
-        _uid = std::string(tmp);
-    else
-        _uid = "";
-=======
     char tmp[1000]={0};
     sscanf(value,"id=%s", tmp);
     _uid = tmp;
->>>>>>> Stashed changes
+
 }
 
 std::string NetController::idGenerate()

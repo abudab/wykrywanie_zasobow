@@ -33,6 +33,13 @@ class DatabaseStorage
 
   void getData( const char* sql_query, std::string id );
   std::string* getResponse( std::string id );
+
+  std::pair<std::string,std::string>* getRequest( void );
+  void storeRequest( std::string xml, std::string id );
+  
+  void registerLocalIndex( std::string url );
+  void deleteLocalIndex( std::string url );
+
  private:
   pqxx::connection *con;
 

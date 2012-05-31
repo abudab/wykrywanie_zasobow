@@ -27,7 +27,7 @@ class NetController
 
 
 
-        styd::string HttpRequest(std::string adres,std::string message);
+        std::string HttpRequest(std::string adres,std::string message);
 
 
 

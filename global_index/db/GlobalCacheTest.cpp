@@ -25,8 +25,10 @@ using std::string;
 using std::vector;
 
 int main(){
+
+  NetController net = NetController();
   
-  GlobalCache gc = GlobalCache();
+  GlobalCache gc = GlobalCache( &net );
 
   /*
   string str("<Search name='request_001' id='12345'><Filters><Filter name='CPU-Frequency' />"
