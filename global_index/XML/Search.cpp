@@ -277,3 +277,64 @@ void Search::setFilters(vector<string*> comp)
         _filters.push_back(c);
     }
 }
+string Search::toXML()
+{
+    string xml="<?xml version='1.0' ?><Search name='";
+    xml+=_name;
+    xml+="' id='";
+    xml+=getId();
+    xml+="'> <Filters>";
+
+    for(int i=0;i<_filters.size();++i)
+    {
+        xml+="<Filter name='";
+        xml+=(*_filters[i]);
+        xml+="' />";
+    }
+    xml+="</Filters><Data>";
+    for(int i=0;i<_comp.size();++i)
+    {
+        xml+="<Compare type='";
+        xml+=_comp[i]->getType();
+        xml+="'>";
+        //wypisanie elementow _comp
+        xml+=elements(_comp[i]);
+        xml+="</Compare>";
+    }
+
+    xml+="</Data></Search>";
+    return xml;
+}
+string Search::elements(Compare* c)
+{
+    string result="";
+    for(int i=0;i<c->getInfo().size();++i)
+    {
+        Compare* cc=new Compare();
+        //Atribute* ati=new Atribute();
+        if(dynamic_cast<Compare*>(c->getInfo()[i]))
+        {
+            result+="<Compare type='";
+            result+=c->getInfo()[i]->getType();
+            result+="'>";
+            cc=(dynamic_cast<Compare*>(c->getInfo()[i]))->Copy();
+            result+=elements(cc);
+            result+="</Compare>";
+        }
+        else
+        {
+            if(dynamic_cast<Atribute*>(c->getInfo()[i]))
+            {
+                result+="<Atrybute name='";
+                result+=(dynamic_cast<Atribute*>(c->getInfo()[i]))->getName();
+                result+="' compType='";
+                result+=(dynamic_cast<Atribute*>(c->getInfo()[i]))->getType();
+                result+="' value='";
+                result+=(dynamic_cast<Atribute*>(c->getInfo()[i]))->getValue();
+                result+="' />";
+            }
+        }
+    }
+
+    return result;
+}
