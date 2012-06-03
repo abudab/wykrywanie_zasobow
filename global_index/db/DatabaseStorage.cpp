@@ -108,7 +108,7 @@ void DatabaseStorage::storeResponse( std::string xml, string id )
 
 
 ///////////////////
-// STORERESPONSE //
+// GETRERESPONSE //
 ///////////////////#######################################
 
 std::string* DatabaseStorage::getResponse( string id )
@@ -133,4 +133,70 @@ std::string* DatabaseStorage::getResponse( string id )
     return temp;
   }
 
+}
+
+////////////////
+// STOREREQUEST //
+////////////////#######################################
+
+void DatabaseStorage::storeRequest( std::string xml, std::string id ){
+  stringstream query( stringstream::in | stringstream::out );
+  query << "INSERT INTO requests(req_id, xml) VALUES(" << id << ", $$" << xml << "$$);";
+  //cout << query.str() << endl;
+
+  pqxx::work txn(*con);
+  txn.exec( query.str() );
+
+  txn.commit();
+}
+
+////////////////////////
+// REGISTERLOCALINDEX //
+////////////////////////#######################################
+
+void DatabaseStorage::registerLocalIndex( std::string url ){
+  stringstream query( stringstream::in | stringstream::out );
+  query << "INSERT INTO local_indexes(uri) VALUES($$" << url << "$$);";
+  //cout << query.str() << endl;
+
+  pqxx::work txn(*con);
+  txn.exec( query.str() );
+
+  txn.commit();
+}
+
+////////////////////////
+// REGISTERLOCALINDEX //
+////////////////////////#######################################
+
+void DatabaseStorage::deleteLocalIndex( std::string uri ){
+  stringstream query( stringstream::in | stringstream::out );
+  query << "DELTE FROM local_indexes WHERE uri = " << uri << ";";
+  //cout << query.str() << endl;
+
+  pqxx::work txn(*con);
+  txn.exec( query.str() );
+
+  txn.commit();
+}
+
+
+////////////////
+// GETREQUEST //
+////////////////#######################################
+
+std::pair<std::string,std::string>* DatabaseStorage::getRequest( void ){
+
+  const char sql_query[] = "SELECT req_id, xml FROM requests LIMIT 1;";
+
+  pqxx::work txn(*con);
+  pqxx::result res = txn.exec( sql_query );
+  txn.commit();
+
+  if( res.size() != 1 ) return NULL;
+
+  std::string id( res[0][0].c_str() );
+  std::string xml( res[0][0].c_str() );
+
+  return new std::pair<std::string, std::string>( id, xml );
 }
