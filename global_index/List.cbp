@@ -44,7 +44,7 @@
 		<Unit filename="XML/Compare.h" />
 		<Unit filename="XML/Monitor.cpp" />
 		<Unit filename="XML/Monitor.h" />
-		<Unit filename="XML/Responce.cpp" />
+		<Unit filename="XML/Response.cpp" />
 		<Unit filename="XML/Response.h" />
 		<Unit filename="XML/Search.cpp" />
 		<Unit filename="XML/Search.h" />

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1336342496 source:/home/agent/wykrywanie_zasobow/global_index/Net/NetController.cpp
+1338321535 source:/home/agent/wykrywanie_zasobow/global_index/Net/NetController.cpp
 	"NetController.h"
 	<sys/types.h>
 	<sys/stat.h>
@@ -12,8 +12,13 @@
 	<unistd.h>
 	<syslog.h>
 	<sys/time.h>
+	<curl/curl.h>
+	<curl/easy.h>
+	<curlpp/cURLpp.hpp>
+	<curlpp/Easy.hpp>
+	<curlpp/Options.hpp>
 
-1336341319 /home/agent/wykrywanie_zasobow/global_index/Net/NetController.h
+1338321535 /home/agent/wykrywanie_zasobow/global_index/Net/NetController.h
 	<iostream>
 	<cstring>
 
@@ -89,10 +94,11 @@
 	<new>
 	<stdint.h>
 
-1336342604 source:/home/agent/wykrywanie_zasobow/global_index/main.cpp
+1338223144 source:/home/agent/wykrywanie_zasobow/global_index/main.cpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
+	<exception>
 	"Net/NetController.h"
 	"XML/Search.h"
 	"db/GlobalCache.hxx"
@@ -118,7 +124,7 @@
 	"../XML/Monitor.h"
 	"../XML/Atribute.h"
 
-1336342561 source:/home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.cpp
+1338223144 source:/home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.cpp
 	"GlobalCache.hxx"
 
 1336342561 /home/agent/wykrywanie_zasobow/global_index/db/GlobalCache.hxx

@@ -22,6 +22,7 @@ class QueryHandler(URLHandler):
   def POST(self):
     tree=ElementTree.fromstring(web.data())
     query=tree.getchildren()[1]
+    web.header('Content-Type', 'text/xml')
     return self.createXMLResp(FilterByQuery().filter(query,self.__server__.getNodesList().poProstuDajListe()))
 	
   def createXMLResp(self,resp):
@@ -48,6 +49,7 @@ class TimestampHandler(URLHandler):
   def POST(self):
     tree=ElementTree.fromstring(web.data())
     query=tree.getchildren()[0]
+    web.header('Content-Type', 'text/xml')
     return self.createXMLResp(FilterByTimestamp().filter(query,self.__server__.getNodesList().poProstuDajListe()))
 	
   def createXMLResp(self,resp):
