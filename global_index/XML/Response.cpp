@@ -78,7 +78,7 @@ void Response::setMonitors(vector <Monitor*> mon)
 /// Funkcja zwracająca string będący XML-em reprezentującym odpowiedź na zapytanie
 string Response::toXML()
 {
-    string xml="<Response id='";
+    string xml="<?xml version='1.0' ?> <Response id='";
     stringstream ss;
     ss << _id;
     xml+=ss.str();
