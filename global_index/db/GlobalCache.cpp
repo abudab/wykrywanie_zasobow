@@ -186,18 +186,18 @@ std::pair<std::string,std::string>*  GlobalCache::getRequest( void )
 // registerLocalIndex //
 ////////////////////////#######################################
 
-void GlobalCache::registerLocalIndex( std::string url )
+void GlobalCache::registerLocalIndex( std::string uri )
 {
-  db->registerLocalIndex( url );
+  db->registerLocalIndex( uri );
 }
 
 //////////////////////
 // deleteLocalIndex //
 //////////////////////#######################################
 
-void GlobalCache::deleteLocalIndex( std::string url )
+void GlobalCache::deleteLocalIndex( std::string uri )
 {
-  db->deleteLocalIndex( url );
+  db->deleteLocalIndex( uri );
 }
 
 ////////////
@@ -208,7 +208,3 @@ bool GlobalCache::update( void )
 {
   // BLOCKER: get_all_local_indexes()
 }
-
-
-
-
