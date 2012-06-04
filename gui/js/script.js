@@ -1,8 +1,48 @@
 $(document).ready(function(){
-	var resourcesUrl = 'resources.xml';
-	
-	getResources(resourcesUrl);
+	var globalIndexUrl = '/cgi-bin/GlobalIndex';
+
+	getGlobalIndex(globalIndexUrl);
 });
+
+function getGlobalIndex(url) {
+	var random_id = Math.round(Math.random()*1000000000);
+	$.ajax({
+		url: url,
+		contentType: 'text/xml',
+		data: "<Search name='request_"+random_id+"' id='"+random_id+"'><Filters><Filter name='CPU-Frequency'/><Filter name='MEM-Count' /><Filter name='OS-Name' /></Filters><Data><Comparetype='OR'><Compare type='AND'><Atrybute name='CPU-Frequency' compType='>='value='1000' /><Atrybute name='CPU-Frequency' compType='<=' value='1500'/></Compare><Atrybute name='MEM-Count' compType='>=' value='4000'/></Compare></Data></Search>",
+		dataType: 'text',
+		type: 'post',
+		error: onGetGlobalIndexError,
+		success: onGetGlobalIndexSuccess
+	});
+}
+
+function getGlobalIndexList(url) {
+        $.ajax({
+                url: url,
+                dataType: 'xml',
+                type: 'get',
+                error: onGetGlobalIndexError,
+                success: onGetGlobalIndexSuccess
+        });
+}
+
+function onGetGlobalIndexError(jqXHR, textStatus, errorThrown) {
+	console.error('onGetGlobalIndexError('+textStatus+'): '+errorThrown);
+	console.info('Response headers:\n\n'+jqXHR.getAllResponseHeaders());
+
+	var location = jqXHR.getResponseHeader('Location');
+	if (location !== null) {
+		getGlobalIndexList(location);
+	}
+}
+
+function onGetGlobalIndexSuccess(data, textStatus, jqXHR) {
+	var location = jqXHR.getResponseHeader('Location');
+	if (location !== null) {
+		getResources(location);
+	}
+}
 
 /**
  * Get resources from URL.
@@ -38,25 +78,26 @@ function onGetResourcesError(jqXHR, textStatus, errorThrown) {
 function onGetResourcesSuccess(data, textStatus, jqXHR) {
 	var $list = $('#resources-list');
 	var $data = $(data);
-	var $resources = $data.find('resource');
+	var $resources = $data.find('Monitor');
 	
 	if ($resources.size() > 0) {
-		$resources.each(function(){
+		$resources.each(function(i, item){
 			var $item = $(this);
-			var id = $item.attr('href').split('/').pop();
+			//var id = $item.attr('href').split('/').pop();
+			var id = i;
 			
 			var $listItem = $('<dt>')
 				.attr('id', 'resource-' + id)
 				.attr('data-toggle', 'collapse')
 				.attr('data-target', '#resource-' + id + ' + dd')
-				.text($item.find('name').text()).
+				.text($item.attr('name')).
 				on('click', toggleToggleIcon);
 				
 			var $icon = $('<i>')
 				.addClass('icon-plus-sign')
 			$icon.prependTo($listItem);
 			
-			var $attrs = $item.find('attribute');
+			var $attrs = $item.find('Atrybute');
 			if ($attrs.size() > 0) {
 				$listItem.appendTo($list);
 				
@@ -65,7 +106,7 @@ function onGetResourcesSuccess(data, textStatus, jqXHR) {
 				$attrs.each(function(){
 					var $item = $(this);
 					var $li = $('<li>');
-					$li.text($item.attr('name') + ': ' + $item.attr('value'));
+					$li.text($item.attr('name') + ' (' + $item.attr('compType') + '): ' + $item.attr('value'));
 					$li.appendTo($ul);
 				});
 				$ul.appendTo($descr);
