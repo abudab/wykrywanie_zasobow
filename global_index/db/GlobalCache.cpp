@@ -211,4 +211,31 @@ bool GlobalCache::update( void )
 
 
 
+Response GlobalCache::localsRequest(string s,string id)
+{
+    NetController core;
+    char query[] = "SELECT uri FROM local_indexes;";
+    pqxx::result response;
+    response = db->localRequest(query);
+
+    int size = response.size();
+
+    Response res[size];
+
+  for( int i=0; i<size; ++i ){
+      const pqxx::result::tuple row = response[i];
+    for(pqxx::result::tuple::const_iterator field = row.begin(); field!=row.end(); ++ field){
+      res[i] = core.HttpRequest(field.c_str(),s);
+
+    }
+  }
+
+    //////////////////////////////////////
+    //sumowanie monioobiektow
+    //////////////////////////////////////
+
+    Response resp = Response();
+    return resp;
+
+}
 

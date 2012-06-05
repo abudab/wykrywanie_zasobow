@@ -32,7 +32,11 @@ class GlobalCache
    GlobalCache( NetController *net );
   ~GlobalCache();
   void setRequest( Search* s, std::string id );
+  Response localRequest(Search* s);
+  //
   std::string* getResponse( std::string id );
+  Response localsRequest(std::string s,std::string id);
+  //
  private:
   NetController *net;
   QueryDispatcher *qd;

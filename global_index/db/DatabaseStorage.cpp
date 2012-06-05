@@ -69,7 +69,7 @@ void DatabaseStorage::getData( const char* sql_query, string id )
 
   Response resp = Response();
   resp.setId( id );
-    
+
   int size = res.size();
   for( int i=0; i<size; ++i ){
     Monitor* mon = new Monitor();
@@ -85,7 +85,7 @@ void DatabaseStorage::getData( const char* sql_query, string id )
   }
 
   storeResponse( resp.toXML(), id );
-  
+
 }
 
 
@@ -200,3 +200,29 @@ std::pair<std::string,std::string>* DatabaseStorage::getRequest( void ){
 
   return new std::pair<std::string, std::string>( id, xml );
 }
+
+pqxx::result DatabaseStorage::localRequest(char* request)
+{
+    pqxx::work txn(*con);
+    pqxx::result res = txn.exec(request );
+    txn.commit();
+
+/*
+  int size = res.size();
+  string resp="";
+  for( int i=0; i<size; ++i ){
+      const pqxx::result::tuple row = res[i];
+    for(pqxx::result::tuple::const_iterator field = row.begin(); field!=row.end(); ++ field){
+      resp+= field.c_str();
+        resp+="; ";
+    }
+  }
+
+
+*/
+
+    return res;
+}
+
+
+

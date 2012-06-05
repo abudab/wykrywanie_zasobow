@@ -36,10 +36,11 @@ class DatabaseStorage
 
   std::pair<std::string,std::string>* getRequest( void );
   void storeRequest( std::string xml, std::string id );
-  
+  //
+  pqxx::result localRequest(char* request);
+  //
   void registerLocalIndex( std::string url );
   void deleteLocalIndex( std::string url );
-
  private:
   pqxx::connection *con;
 
