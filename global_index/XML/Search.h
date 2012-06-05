@@ -32,6 +32,7 @@ class Search{
 		void setCompare(std::vector<Compare*> comp);
 		void setFilters(std::vector<Filter*> filter);
 		void loadS(std::string xml);// pobiera XML
+		std::string toXML();
 
 private:
 		std::string _name;
@@ -40,6 +41,7 @@ private:
 		std::vector<Compare*> _comp;
 		void readC(pugi::xml_node,Compare* c);
 		void readA( pugi::xml_node, Compare* c);
+		std::string elements(Compare* c);
 };
 
 #endif
