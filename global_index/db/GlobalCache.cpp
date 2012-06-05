@@ -234,9 +234,13 @@ Response GlobalCache::localsRequest(string s,string id)
     //////////////////////////////////////
     //sumowanie monioobiektow
     //////////////////////////////////////
+    if(size)
+    {
+        for(int i=1; i<size; ++i)
+            res[0] += res[i];
+    }
 
-    Response resp = Response();
-    return resp;
+    return res[0];
 
 }
 
