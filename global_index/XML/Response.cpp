@@ -106,3 +106,45 @@ string Response::toXML()
     xml+="</Response>";
     return xml;
 }
+
+void Response::operator+= (Response& obj)
+{
+    unsigned int size = obj._mon.size();
+    Monitor* tmp = NULL;
+
+    for(unsigned int i=0; i < size; ++i)
+    {
+        tmp = new Monitor();
+
+        tmp->Copy(obj._mon[i]);
+        _mon.push_back(tmp);
+    }
+}
+
+Response Response::operator+ (Response& obj)
+{
+    Response out;
+
+    unsigned int size = _mon.size();
+    Monitor* tmp = NULL;
+
+    for(unsigned int i=0; i < size; ++i)
+    {
+        tmp = new Monitor();
+
+        tmp->Copy(_mon[i]);
+        out._mon.push_back(tmp);
+    }
+
+    size = obj._mon.size();
+
+    for(unsigned int i=0; i < size; ++i)
+    {
+        tmp = new Monitor();
+
+        tmp->Copy(obj._mon[i]);
+        out._mon.push_back(tmp);
+    }
+
+    return out;
+}

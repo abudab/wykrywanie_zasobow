@@ -59,7 +59,7 @@ int main(int argc, const char* argv[])
 
         try
         {
-            GlobalCache db = GlobalCache();
+            GlobalCache db = GlobalCache(&core);
             db.setRequest(&s, core.getUID());
         }
         catch ( std::exception& e)

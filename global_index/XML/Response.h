@@ -25,6 +25,9 @@ class Response{
 
 		std::string toXML();
 
+        void operator+= (Response& obj);
+        Response operator+ (Response& obj);
+
     private:
 		int _id;
 		std::vector <Monitor*> _mon;
