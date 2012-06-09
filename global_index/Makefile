@@ -1,6 +1,6 @@
 CXX=g++
-CXXFLAGS=-Wall -pedantic -c -O2
-LDFLAGS=-lpqxx
+CXXFLAGS=-Wall -pedantic -c -g
+LDFLAGS=-lpqxx -lcurlpp
 
 DB_SRC=db/DatabaseStorage.cpp db/GlobalCache.cpp db/QueryDispatcher.cpp
 SRC=$(DB_SRC) Net/*.cpp pugi/*.cpp XML/*.cpp

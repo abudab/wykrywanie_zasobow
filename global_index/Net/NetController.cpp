@@ -95,11 +95,11 @@ std::string NetController::postContentRead()
 void NetController::getContentRead()
 {
     char *value = getenv( "QUERY_STRING" );
-    int size = sizeof(value);
+    int size = strlen(value);
     char tmp[size];
 
     //char tmp[1000]={0};
-    char tmp[1000]={0};
+    //char tmp[1000]={0};
 
     sscanf(value,"id=%s", tmp);
     _uid = tmp;

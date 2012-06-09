@@ -207,10 +207,8 @@ void GlobalCache::deleteLocalIndex( std::string uri )
 bool GlobalCache::update( void )
 {
   // BLOCKER: get_all_local_indexes()
+  return true;
 }
-<<<<<<< HEAD
-
-
 
 Response GlobalCache::localsRequest(string s,string id)
 {
@@ -226,7 +224,8 @@ Response GlobalCache::localsRequest(string s,string id)
   for( int i=0; i<size; ++i ){
       const pqxx::result::tuple row = response[i];
     for(pqxx::result::tuple::const_iterator field = row.begin(); field!=row.end(); ++ field){
-      res[i] = core.HttpRequest(field.c_str(),s);
+      //TODO: Konstruktor z XML'a
+      //res[i] = Response(core.HttpRequest(field.c_str(),s));
 
     }
   }
@@ -243,6 +242,3 @@ Response GlobalCache::localsRequest(string s,string id)
     return res[0];
 
 }
-
-=======
->>>>>>> a3e2fa1bfadb004eee7b34df6e4fca84cb453b5b

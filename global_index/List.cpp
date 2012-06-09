@@ -11,7 +11,7 @@ int main()
     //std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
     core.getContentRead();
 
-    GlobalCache db;
+    GlobalCache db(&core);
 
     std::string* resp = db.getResponse( core.getUID().c_str() );
 
