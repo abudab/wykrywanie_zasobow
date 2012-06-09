@@ -29,7 +29,7 @@ GlobalCache::GlobalCache( NetController *net )
 {
   //cout << "Creating GlobalCache" << endl;
   qd = new QueryDispatcher();
-  db = new DatabaseStorage( "localhost", "przespolowe", "a9M9PtDzgst5RFD", "5532" );
+  db = new DatabaseStorage( "localhost", "res", "hd7dfhvb", "5532" );
   this->net = net;
 }
 
@@ -208,6 +208,33 @@ bool GlobalCache::update( void )
 {
   // BLOCKER: get_all_local_indexes()
   return true;
+}
+
+///////////////////////
+// getLocalIndexList //
+///////////////////////#######################################
+
+std::vector<std::string> GlobalCache::getLocalIndexList()
+{
+  std::string query = "SELECT uri FROM local_indexes;";
+  pqxx::result response;
+  
+  response = db->localRequest( (char*)(query.c_str()) );
+
+  unsigned int size = response.size();
+  
+  std::vector<std::string> uri;
+  uri.resize(size);
+
+  for(unsigned int i=0; i<size; ++i )
+    {
+      const pqxx::result::tuple row = response[i];
+      for(pqxx::result::tuple::const_iterator field = row.begin(); field!=row.end(); ++ field)
+	  uri[i] = field.c_str();
+	
+    }
+
+  return uri;
 }
 
 Response GlobalCache::localsRequest(string s,string id)

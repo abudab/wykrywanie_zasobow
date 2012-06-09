@@ -19,6 +19,8 @@
 
 #include <cstdio>
 #include <typeinfo>
+#include <vector>
+
 #include <boost/regex.hpp>
 #include "QueryDispatcher.hxx"
 #include "DatabaseStorage.hxx"
@@ -42,6 +44,8 @@ class GlobalCache
   void deleteLocalIndex( std::string url );
   bool update( void );
 
+
+  std::vector<std::string> getLocalIndexList();
 
  private:
   NetController *net;
