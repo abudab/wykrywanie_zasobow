@@ -1,6 +1,6 @@
 CXX=g++
 CXXFLAGS=-Wall -pedantic -c -g
-LDFLAGS=-lpqxx -lcurlpp
+LDFLAGS=-lpqxx -I/opt/curlpp/include/ -L/opt/curlpp/lib/ -lcurlpp -lutilspp
 
 DB_SRC=db/DatabaseStorage.cpp db/GlobalCache.cpp db/QueryDispatcher.cpp
 SRC=$(DB_SRC) Net/*.cpp pugi/*.cpp XML/*.cpp
@@ -19,6 +19,13 @@ LIST=bin/List
 MAIN=bin/GlobalIndex
 REGISTER=bin/Registration
 LOCAL_LIST=bin/LocalIndexList
+
+LIST_NAME=List
+MAIN_NAME=GlobalIndex
+REGISTER_NAME=Registration
+LOCAL_LIST_NAME=LocalIndexList
+
+INSTALL_PATCH=/opt/bitnami/apache2/cgi-bin/
 
 all : list main register local_list
 
@@ -68,4 +75,19 @@ clean :
 	rm -f $(REGISTER)
 	rm -f $(LOCAL_LIST)
 	rm -f $(OBJ)
-	rm -f main.o List.o
+	rm -f main.o List.o Registration_main.o LocalIndexList.o
+
+install :
+	@echo "Install $(MAIN) => $(INSTALL_PATCH)$(MAIN_NAME)"
+	cp $(MAIN) $(INSTALL_PATCH)$(MAIN_NAME)
+
+	@echo "Install $(LIST) => $(INSTALL_PATCH)$(LIST_NAME)"
+	cp $(LIST) $(INSTALL_PATCH)$(LIST_NAME)
+
+	@echo "Install $(REGISTER) => $(INSTALL_PATCH)$(REGISTER_NAME)"
+	cp $(REGISTER) $(INSTALL_PATCH)$(REGISTER_NAME)
+
+	@echo "Install $(LOCAL_LIST) => $(INSTALL_PATCH)$(LOCAL_LIST_NAME)"
+	cp $(LOCAL_LIST) $(INSTALL_PATCH)$(LOCAL_LIST_NAME)	
+
+

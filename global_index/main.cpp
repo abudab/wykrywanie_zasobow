@@ -8,6 +8,8 @@
 #include "XML/Search.h"
 #include "db/GlobalCache.hxx"
 
+#include <fstream>
+
 using std::cout;
 using std::endl;
 
@@ -25,9 +27,12 @@ int main(int argc, const char* argv[])
     core.beginHttpHeader(202);
 
     std::string id, content;
+        id = core.idGenerate();
 
-    id = core.idGenerate();
-    core.sendURI(core.addrGenerate(id));
+
+
+        //std::cout << core.addrGenerate(id)<<std::endl;
+        core.sendURI(core.addrGenerate(id));
 
     std::string str("POST");
     if(!str.compare(getenv("REQUEST_METHOD")))
@@ -40,34 +45,26 @@ int main(int argc, const char* argv[])
     ////////////////////////
 
     ////////////////////////
-    // KONCZYMY KOMUNIKACJE Z KLIENTEM PRZEZ DEMONIZACJE PROCESU
-    ////////////////////////
-    //
-    if( !core.daemonize() )
-        std::cout << "demonizacja sie nie udala\n";
-    //
-    ////////////////////////
-
-    ////////////////////////
     // TUTAJ PZRETWARZAMY ZAPYTANIE W CELU WYGENEROWANIA WYNIKOW
     ////////////////////////
     //
-
+    
     if(! content.empty() )
       {
-        Search s( content );
-
-        try
-        {
-            GlobalCache db = GlobalCache(&core);
-            db.setRequest(&s, core.getUID());
-        }
-        catch ( std::exception& e)
-        {
-            std::cout << "\n...\n" << e.what() << "\n...\n" << std::endl;
-
-        }
-
+	Search s( content );
+	
+	try
+	  {
+	    GlobalCache db = GlobalCache(&core);
+	    db.setRequest(&s, core.getUID());
+	  }
+	catch( std::exception& e)
+	  {
+	    std::ofstream log;
+	    log.open("/home/bitnami/index.log");
+	    log << "\n...\n" << e.what() << "\n...\n"<< std::endl;
+	    log.close();
+	  }
       }
     //
     ////////////////////////

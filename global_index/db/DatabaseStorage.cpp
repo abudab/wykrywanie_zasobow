@@ -31,7 +31,7 @@ DatabaseStorage::DatabaseStorage(const char* host, const char* user, const char*
   string cred = "";
   cred += "host=";
   cred += host;
-  cred += " dbname=pz-global";
+  cred += " dbname=global_resource";
   cred += " user=";
   cred += user;
   cred += " password=";

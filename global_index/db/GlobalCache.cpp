@@ -29,7 +29,7 @@ GlobalCache::GlobalCache( NetController *net )
 {
   //cout << "Creating GlobalCache" << endl;
   qd = new QueryDispatcher();
-  db = new DatabaseStorage( "localhost", "res", "hd7dfhvb", "5532" );
+  db = new DatabaseStorage( "localhost", "res", "hd7dfhvb", "5432" );
   this->net = net;
 }
 

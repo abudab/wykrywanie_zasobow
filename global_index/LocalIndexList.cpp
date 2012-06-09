@@ -9,28 +9,33 @@
 
 int main()
 {
-    NetController core;
-    //std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
-    //core.getContentRead();
-
-    GlobalCache db(&core);
-
-    core.beginHttpHeader(200);
- 
-    core.endHttpHeader();
-
-    std::vector<std::string> local = db.getLocalIndexList();
-
-    unsigned int size = local.size();
-
-    std::cout << "<localIndexList>";
-
-    for(unsigned int i=0; i < size; ++i)
-	std::cout << "LocalIndex uri=\"" << local[i] <<"\" \\>"; 
+  NetController core;
+  GlobalCache db(&core);    
+  //std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
+  //core.getContentRead();
+  
+  core.initialize();
+  core.beginHttpHeader(200);
+  core.endHttpHeader();
+  
+  try
+    {
+      std::vector<std::string> local = db.getLocalIndexList();
       
-
-    std::cout << "<\\localIndexList>";
-
-
-    return 0;
+      unsigned int size = local.size();
+      
+      std::cout << "<localIndexList>";
+      
+      for(unsigned int i=0; i < size; ++i)
+	std::cout << "LocalIndex uri=\"" << local[i] <<"\" \\>";
+        
+      std::cout << "<\\localIndexList>";   
+    }
+  catch( std::exception& e)
+    {
+      std::cout << "Cos sie zjebalo" << std::endl;
+      std::cout << e.what() << std::endl;
+    }
+  
+  return 0;
 }
