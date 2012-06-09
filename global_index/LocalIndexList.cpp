@@ -11,8 +11,7 @@ int main()
 {
   NetController core;
   GlobalCache db(&core);    
-  //std::cout<<"Content-type: text/html"<<std::endl<<std::endl;
-  //core.getContentRead();
+  
   
   core.initialize();
   core.beginHttpHeader(200);
@@ -27,13 +26,13 @@ int main()
       std::cout << "<localIndexList>";
       
       for(unsigned int i=0; i < size; ++i)
-	std::cout << "LocalIndex uri=\"" << local[i] <<"\" \\>";
+	std::cout << "<LocalIndex uri=\"" << local[i] <<"\" />";
         
-      std::cout << "<\\localIndexList>";   
+      std::cout << "</localIndexList>" << std::endl;   
     }
   catch( std::exception& e)
     {
-      std::cout << "Cos sie zjebalo" << std::endl;
+      std::cout << "Cos poszlo nie tak" << std::endl;
       std::cout << e.what() << std::endl;
     }
   

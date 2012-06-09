@@ -36,31 +36,29 @@ int main(int argc, const char* argv[])
     ////////////////////////
 
     ////////////////////////
-    // KONCZYMY KOMUNIKACJE Z KLIENTEM PRZEZ DEMONIZACJE PROCESU
-    ////////////////////////
-    //
-    if( !core.daemonize() )
-        std::cout << "demonizacja sie nie udala\n";
-    //
-    ////////////////////////
-
-    ////////////////////////
     // TUTAJ PZRETWARZAMY ZAPYTANIE W CELU WYGENEROWANIA WYNIKOW
     ////////////////////////
     //
 
     if(! content.empty() )
       {
-        Registration r( content );
-	GlobalCache db(&core);
-
-        //TODO; Olek to powinno trafic do bazy danych, to jest adres lokalnego indeksu
-        //r.Getaddress();
-	db.registerLocalIndex( r.Getaddress() );
+	try
+	  {
+	    Registration r( content );
+	    GlobalCache db(&core);
+	    
+	    //TODO; Olek to powinno trafic do bazy danych, to jest adres lokalnego indeksu
+	    //r.Getaddress();
+	    db.registerLocalIndex( r.Getaddress() );
+	  }
+	catch( exception& e)
+	  {
+	    
+	  }
       }
     //
     ////////////////////////
-
+    
 
 
     return 0;
