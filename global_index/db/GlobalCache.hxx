@@ -37,6 +37,12 @@ class GlobalCache
   std::string* getResponse( std::string id );
   Response localsRequest(std::string s,std::string id);
   //
+
+  void registerLocalIndex( std::string url );
+  void deleteLocalIndex( std::string url );
+  bool update( void );
+
+
  private:
   NetController *net;
   QueryDispatcher *qd;
@@ -45,10 +51,6 @@ class GlobalCache
 
   void saveRequest( std::string id, std::string data );
   std::pair<std::string,std::string>*  getRequest( void );
-
-  void registerLocalIndex( std::string url );
-  void deleteLocalIndex( std::string url );
-  bool update( void );
 
   void walkTree( Info *i, std::vector <std::string> *sv );
   std::string validate( std::string text, const char* regex );

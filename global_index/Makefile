@@ -6,7 +6,8 @@ DB_SRC=db/DatabaseStorage.cpp db/GlobalCache.cpp db/QueryDispatcher.cpp
 SRC=$(DB_SRC) Net/*.cpp pugi/*.cpp XML/*.cpp
 
 LIST_SRC=$(SRC) List.cpp  
-MAIN_SRC=$(SRC) main.cpp  
+MAIN_SRC=$(SRC) main.cpp 
+REGISTER_SRC=$(SRC) Registration_main.cpp 
 
 OBJ:= $(patsubst %.cpp, %.o, $(wildcard $(SRC)))
 
@@ -14,8 +15,10 @@ INC=*.hpp db/*.hxx Net/*.h pugi/*.h XML/*.h
 
 LIST=bin/List
 MAIN=bin/GlobalIndex
+REGISTER=bin/Registration
 
-all : list main
+
+all : list main register
 
 list : List.o $(OBJ) 
 	@echo "Linking $(LIST)"
@@ -24,6 +27,10 @@ list : List.o $(OBJ)
 main : $(OBJ) main.o
 	@echo "Linking $(MAIN)"
 	@$(CXX) $(LDFLAGS) -o $(MAIN) $(OBJ) main.o
+
+register : Registration_main.o $(OBJ)
+	@echo "Linking $(REGISTER)"
+	@$(CXX) $(LDFLAGS) -o $(REGISTER) $(OBJ) Registration_main.o
 
 $(OBJ) : %.o : %.cpp
 	@echo "Compile $<"
@@ -37,8 +44,13 @@ List.o :
 	@echo "Compile List.cpp"
 	@$(CXX) $(CXXFLAGS) -o List.o List.cpp
 
+Registration_main.o :
+	@echo "Compile Registration_main.cpp"
+	@$(CXX) $(CXXFLAGS) -o Registration_main.o Registration_main.cpp
+
 clean : 
 	rm -f $(MAIN)
 	rm -f $(LIST)
+	rm -f $(REGISTER)
 	rm -f $(OBJ)
 	rm -f main.o List.o

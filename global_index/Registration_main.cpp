@@ -52,9 +52,11 @@ int main(int argc, const char* argv[])
     if(! content.empty() )
       {
         Registration r( content );
+	GlobalCache db(&core);
 
         //TODO; Olek to powinno trafic do bazy danych, to jest adres lokalnego indeksu
         //r.Getaddress();
+	db.registerLocalIndex( r.Getaddress() );
       }
     //
     ////////////////////////
